@@ -1,0 +1,396 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ═══════════════════════════════════════════════════════
+         CONVERTERS
+    ═══════════════════════════════════════════════════════ -->
+    <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FONTS
+    ═══════════════════════════════════════════════════════ -->
+    <FontFamily x:Key="AppFont">pack://application:,,,/MarkingSystemV2;component/Fonts/#NanumSquare, 맑은 고딕, Malgun Gothic</FontFamily>
+
+    <!-- ═══════════════════════════════════════════════════════
+         COLORS  (Light Theme)
+    ═══════════════════════════════════════════════════════ -->
+
+    <SolidColorBrush x:Key="AppBackground"   Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="FieldBackground" Color="#EAF2FB"/>
+    <SolidColorBrush x:Key="InputBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DividerBrush"    Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="BorderBrush"     Color="#CCCCCC"/>
+    <SolidColorBrush x:Key="TextPrimary"     Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="TextSecondary"   Color="#555555"/>
+    <SolidColorBrush x:Key="TextLabel"       Color="#333333"/>
+    <SolidColorBrush x:Key="TextDisabled"    Color="#AAAAAA"/>
+    <SolidColorBrush x:Key="BluePrimary"     Color="#1565C0"/>
+    <SolidColorBrush x:Key="BlueHover"       Color="#1976D2"/>
+    <SolidColorBrush x:Key="BluePressed"     Color="#0D47A1"/>
+    <SolidColorBrush x:Key="YellowPrimary"   Color="#F5A200"/>
+    <SolidColorBrush x:Key="YellowHover"     Color="#FFB300"/>
+    <SolidColorBrush x:Key="YellowPressed"   Color="#E59100"/>
+    <SolidColorBrush x:Key="SuccessBrush"    Color="#2E7D32"/>
+    <SolidColorBrush x:Key="ErrorBrush"      Color="#C62828"/>
+
+    <!-- ═══════════════════════════════════════════════════════
+         TEXTBOX
+    ═══════════════════════════════════════════════════════ -->
+
+    <Style x:Key="FluentTextBox" TargetType="TextBox">
+        <Setter Property="Background"               Value="{StaticResource InputBackground}"/>
+        <Setter Property="Foreground"               Value="{StaticResource TextPrimary}"/>
+        <Setter Property="BorderBrush"              Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness"          Value="1"/>
+        <Setter Property="Padding"                  Value="10,0"/>
+        <Setter Property="FontFamily"               Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"                 Value="14"/>
+        <Setter Property="CaretBrush"               Value="{StaticResource TextPrimary}"/>
+        <Setter Property="SelectionBrush"           Value="{StaticResource BluePrimary}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush"     Value="{StaticResource BluePrimary}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#999999"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#F5F5F5"/>
+                            <Setter Property="Foreground" Value="{StaticResource TextDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- PasswordBox용 (FluentTextBox와 동일한 외형) -->
+    <Style x:Key="FluentPasswordBox" TargetType="PasswordBox">
+        <Setter Property="Background"               Value="{StaticResource InputBackground}"/>
+        <Setter Property="Foreground"               Value="{StaticResource TextPrimary}"/>
+        <Setter Property="BorderBrush"              Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness"          Value="1"/>
+        <Setter Property="Padding"                  Value="10,0"/>
+        <Setter Property="FontFamily"               Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"                 Value="14"/>
+        <Setter Property="CaretBrush"               Value="{StaticResource TextPrimary}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush"     Value="{StaticResource BluePrimary}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#999999"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CHECKBOX
+    ═══════════════════════════════════════════════════════ -->
+
+    <Style x:Key="FluentCheckBox" TargetType="CheckBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                            <Border x:Name="checkBorder"
+                                    Width="16" Height="16"
+                                    Background="White"
+                                    BorderBrush="#AAAAAA"
+                                    BorderThickness="1.5"
+                                    CornerRadius="2">
+                                <Path x:Name="checkMark"
+                                      Data="M 2 8 L 6 12 L 13 4"
+                                      Stroke="White" StrokeThickness="2"
+                                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Visibility="Collapsed"/>
+                            </Border>
+                        </BulletDecorator.Bullet>
+                        <ContentPresenter Margin="6,0,0,0" VerticalAlignment="Center"/>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="checkBorder" Property="Background"  Value="{StaticResource BluePrimary}"/>
+                            <Setter TargetName="checkBorder" Property="BorderBrush" Value="{StaticResource BluePrimary}"/>
+                            <Setter TargetName="checkMark"   Property="Visibility"  Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="checkBorder" Property="BorderBrush" Value="{StaticResource BluePrimary}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════════════════════
+         READONLY FIELD  (조회 결과 표시용)
+    ═══════════════════════════════════════════════════════ -->
+
+    <Style x:Key="ReadOnlyTextBox" TargetType="TextBox">
+        <Setter Property="Margin"                   Value="0"/>
+        <Setter Property="Background"               Value="#F5F5F5"/>
+        <Setter Property="Foreground"               Value="{StaticResource TextPrimary}"/>
+        <Setter Property="BorderBrush"              Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness"          Value="1"/>
+        <Setter Property="Padding"                  Value="10,0"/>
+        <Setter Property="FontFamily"               Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"                 Value="14"/>
+        <Setter Property="IsReadOnly"               Value="True"/>
+        <Setter Property="Cursor"                   Value="Arrow"/>
+        <Setter Property="FocusVisualStyle"         Value="{x:Null}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      HorizontalScrollBarVisibility="Disabled"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════════════════════
+         BUTTONS
+    ═══════════════════════════════════════════════════════ -->
+
+    <!-- 파랑 버튼 (기본 액션) -->
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="Background"      Value="{StaticResource BluePrimary}"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontFamily"      Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="FontWeight"      Value="Bold"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="bd" Background="{TemplateBinding Background}"
+                            CornerRadius="3" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{StaticResource BlueHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{StaticResource BluePressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource TextDisabled}"/>
+                            <Setter TargetName="bd" Property="Background" Value="#E0E0E0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 노랑 버튼 (조회) -->
+    <Style x:Key="SecondaryButton" TargetType="Button">
+        <Setter Property="Background"      Value="{StaticResource YellowPrimary}"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontFamily"      Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="FontWeight"      Value="Bold"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="bd" Background="{TemplateBinding Background}"
+                            CornerRadius="3" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{StaticResource YellowHover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="{StaticResource YellowPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource TextDisabled}"/>
+                            <Setter TargetName="bd" Property="Background" Value="#E0E0E0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 회색 버튼 (보조) -->
+    <Style x:Key="GhostButton" TargetType="Button">
+        <Setter Property="Background"      Value="#F0F0F0"/>
+        <Setter Property="Foreground"      Value="{StaticResource TextPrimary}"/>
+        <Setter Property="BorderBrush"     Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily"      Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="#E0E0E0"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="bd" Property="Background" Value="#D0D0D0"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource TextDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════════════════════
+         TEXT STYLES
+    ═══════════════════════════════════════════════════════ -->
+
+    <Style x:Key="TitleText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"   Value="26"/>
+        <Setter Property="FontWeight" Value="ExtraBold"/>
+    </Style>
+
+    <Style x:Key="LabelText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextLabel}"/>
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"   Value="13"/>
+    </Style>
+
+    <Style x:Key="BodyText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"   Value="14"/>
+    </Style>
+
+    <Style x:Key="ValueText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+        <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"   Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!-- ═══════════════════════════════════════════════════════
+         TABCONTROL / TABITEM
+    ═══════════════════════════════════════════════════════ -->
+
+    <Style x:Key="AppTabItem" TargetType="TabItem">
+        <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
+        <Setter Property="FontSize"    Value="14"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+        <Setter Property="Padding"     Value="0"/>
+        <Setter Property="Margin"      Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border x:Name="TabBorder"
+                            Background="White"
+                            Width="160" Height="48"
+                            BorderThickness="0">
+                        <TextBlock x:Name="TabText"
+                                   Text="{TemplateBinding Header}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource TextPrimary}"
+                                   FontFamily="{StaticResource AppFont}"
+                                   FontSize="14"
+                                   FontWeight="Bold"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="TabBorder" Property="Background" Value="{StaticResource BluePrimary}"/>
+                            <Setter TargetName="TabText"   Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False"/>
+                                <Condition Property="IsEnabled"  Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="TabBorder" Property="Cursor" Value="Hand"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AppTabControl" TargetType="TabControl">
+        <Setter Property="Background"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding"         Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TabPanel Grid.Row="0" IsItemsHost="True" Background="White"/>
+                        <Rectangle Grid.Row="1" Fill="{StaticResource DividerBrush}"/>
+                        <ContentPresenter Grid.Row="2"
+                                          x:Name="PART_SelectedContentHost"
+                                          ContentSource="SelectedContent"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

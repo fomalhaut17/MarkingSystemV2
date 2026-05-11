@@ -1,0 +1,130 @@
+<UserControl x:Class="MarkingSystemV2.Views.MarkingInquiryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  Background="{StaticResource AppBackground}">
+        <StackPanel Width="500"
+                    HorizontalAlignment="Left"
+                    Margin="32,28,0,28">
+
+            <!-- ── 물류바코드 ── -->
+            <TextBlock Text="물류바코드" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <Grid Height="40" Margin="0,0,0,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         x:Name="BarcodeBox"
+                         Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource FluentTextBox}"
+                         TextAlignment="Right"
+                         TabIndex="1"
+                         KeyDown="BarcodeBox_KeyDown"
+                         GotFocus="BarcodeBox_GotFocus"/>
+                <Button Grid.Column="2"
+                        Content="조회"
+                        Command="{Binding QueryCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        IsTabStop="False"
+                        Padding="0"/>
+            </Grid>
+
+            <!-- ── 품명 ── -->
+            <TextBlock Text="품명" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding ItemName, Mode=OneWay}"
+                     Height="40"
+                     Style="{StaticResource ReadOnlyTextBox}"
+                     IsTabStop="False"
+                     Margin="0,0,0,24"/>
+
+            <!-- ── 제조일자 ── -->
+            <TextBlock Text="제조일자" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding ManufactureDate, Mode=OneWay}"
+                     Height="40"
+                     Style="{StaticResource ReadOnlyTextBox}"
+                     IsTabStop="False"
+                     Margin="0,0,0,24"/>
+
+            <!-- ── 용기 내 수량 ── -->
+            <TextBlock Text="용기 내 수량" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding Quantity, Mode=OneWay}"
+                     Height="40"
+                     Style="{StaticResource ReadOnlyTextBox}"
+                     IsTabStop="False"
+                     Margin="0,0,0,24"/>
+
+            <!-- ── Lot 코드 ── -->
+            <TextBlock Text="Lot 코드" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <DockPanel Height="40" Margin="0,0,0,24">
+                <Button DockPanel.Dock="Right"
+                        Width="56"
+                        Content="복사"
+                        Command="{Binding CopyLotNoHeadCommand}"
+                        Style="{StaticResource GhostButton}"
+                        FontSize="13"
+                        IsTabStop="False"
+                        Padding="0"/>
+                <Rectangle DockPanel.Dock="Right" Width="6"/>
+                <TextBox Text="{Binding LotNoHead, Mode=OneWay}"
+                         Style="{StaticResource ReadOnlyTextBox}"
+                         IsTabStop="False"/>
+            </DockPanel>
+
+            <!-- ── 최종 발행 Ser. ── -->
+            <TextBlock Text="최종 발행 Ser." Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding LotMax, Mode=OneWay}"
+                     Height="40"
+                     Style="{StaticResource ReadOnlyTextBox}"
+                     IsTabStop="False"
+                     Margin="0,0,0,24"/>
+
+            <!-- ── 발행시작번호 ── -->
+            <TextBlock Text="발행시작번호" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <DockPanel Height="40" Margin="0,0,0,24">
+                <Button DockPanel.Dock="Right"
+                        Width="56"
+                        Content="복사"
+                        Command="{Binding CopyStartSerialCommand}"
+                        Style="{StaticResource GhostButton}"
+                        FontSize="13"
+                        IsTabStop="False"
+                        Padding="0"/>
+                <Rectangle DockPanel.Dock="Right" Width="6"/>
+                <TextBox Text="{Binding StartSerial, Mode=OneWay}"
+                         Style="{StaticResource ReadOnlyTextBox}"
+                         Foreground="{StaticResource BluePrimary}"
+                         FontWeight="Bold"
+                         IsTabStop="False"/>
+            </DockPanel>
+
+            <!-- ── 최종각인번호 ── -->
+            <TextBlock Text="최종각인번호" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
+            <Grid Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="6"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         x:Name="EndSerialBox"
+                         Style="{StaticResource FluentTextBox}"
+                         Text="{Binding EndSerial, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding HasResult}"
+                         TextAlignment="Right"
+                         TabIndex="2"
+                         GotFocus="EndSerialBox_GotFocus"
+                         TextChanged="EndSerialBox_TextChanged"/>
+                <Button Grid.Column="2"
+                        Content="저장"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        IsTabStop="False"
+                        Padding="0"/>
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

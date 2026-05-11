@@ -1,0 +1,144 @@
+<Window x:Class="MarkingSystemV2.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:MarkingSystemV2.Views"
+        Title="만텍 각인 시스템"
+        Width="1440" Height="900"
+        MinWidth="1024" MinHeight="768"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/FluentLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource AppBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 헤더 ── -->
+        <Grid Grid.Row="0" Background="{StaticResource BluePrimary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="만텍 각인 시스템"
+                       Foreground="White"
+                       FontFamily="{StaticResource AppFont}"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Margin="24,0"/>
+
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="0,0,20,0">
+                <Button Content="로그아웃"
+                        Command="{Binding LogoutCommand}"
+                        FontFamily="{StaticResource AppFont}"
+                        FontSize="13"
+                        Foreground="White"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Padding="12,6"/>
+                <TextBlock Text="{Binding TodayDisplay}"
+                           Foreground="White"
+                           FontFamily="{StaticResource AppFont}"
+                           FontSize="13"
+                           VerticalAlignment="Center"
+                           Margin="8,0,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ── 탭 컨테이너 ── -->
+        <TabControl Grid.Row="1"
+                    Style="{StaticResource AppTabControl}"
+                    SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
+
+            <TabItem Header="각인번호 조회" Style="{StaticResource AppTabItem}">
+                <views:MarkingInquiryView DataContext="{Binding MarkingInquiry}"/>
+            </TabItem>
+
+            <TabItem Header="생산 Lot 조회" Style="{StaticResource AppTabItem}">
+                <views:LotInquiryView DataContext="{Binding LotInquiry}"/>
+            </TabItem>
+
+        </TabControl>
+
+        <!-- ── 상태바 (활성 탭에 따라 분기 표시) ── -->
+        <Border Grid.Row="2"
+                Background="{StaticResource FieldBackground}"
+                BorderBrush="{StaticResource DividerBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="20,0">
+            <Grid>
+                <!-- 각인번호 조회 (탭 0) -->
+                <TextBlock VerticalAlignment="Center"
+                           FontFamily="{StaticResource AppFont}"
+                           FontSize="13"
+                           Text="{Binding MarkingInquiry.DisplayStatus}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility"  Value="Collapsed"/>
+                            <Setter Property="Foreground"  Value="{StaticResource TextSecondary}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedTabIndex}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding MarkingInquiry.IsError}" Value="False"/>
+                                        <Condition Binding="{Binding MarkingInquiry.IsBusy}"  Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                </MultiDataTrigger>
+                                <DataTrigger Binding="{Binding MarkingInquiry.IsError}" Value="True">
+                                    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <!-- 생산 Lot 조회 (탭 1) -->
+                <TextBlock VerticalAlignment="Center"
+                           FontFamily="{StaticResource AppFont}"
+                           FontSize="13"
+                           Text="{Binding LotInquiry.DisplayStatus}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility"  Value="Collapsed"/>
+                            <Setter Property="Foreground"  Value="{StaticResource TextSecondary}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedTabIndex}" Value="1">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding LotInquiry.IsError}" Value="False"/>
+                                        <Condition Binding="{Binding LotInquiry.IsBusy}"  Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                </MultiDataTrigger>
+                                <DataTrigger Binding="{Binding LotInquiry.IsError}" Value="True">
+                                    <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>

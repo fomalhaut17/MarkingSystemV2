@@ -1,0 +1,93 @@
+<Window x:Class="MarkingSystemV2.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="만텍 각인 시스템"
+        Width="400" Height="460"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="SingleBorderWindow">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/FluentLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource AppBackground}" Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 타이틀 -->
+        <TextBlock Grid.Row="0"
+                   Text="만텍 각인 시스템"
+                   Style="{StaticResource TitleText}"
+                   HorizontalAlignment="Center"/>
+
+        <!-- 아이디 -->
+        <TextBlock Grid.Row="2" Text="아이디" Style="{StaticResource LabelText}"/>
+        <TextBox   Grid.Row="4" x:Name="IdBox"
+                   Text="{Binding LoginId, UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource FluentTextBox}"
+                   KeyDown="Input_KeyDown"/>
+
+        <!-- 비밀번호 -->
+        <TextBlock Grid.Row="6" Text="비밀번호" Style="{StaticResource LabelText}"/>
+        <PasswordBox Grid.Row="8" x:Name="PasswordBox"
+                     Style="{StaticResource FluentPasswordBox}"
+                     KeyDown="Input_KeyDown"
+                     PasswordChanged="PasswordBox_PasswordChanged"/>
+
+        <!-- 로그인 정보 기억하기 -->
+        <CheckBox Grid.Row="10"
+                  Content="로그인 정보 기억하기"
+                  IsChecked="{Binding RememberMe}"
+                  Style="{StaticResource FluentCheckBox}"
+                  FontFamily="{StaticResource AppFont}"
+                  FontSize="13"
+                  Foreground="{StaticResource TextSecondary}"/>
+
+        <!-- 로그인 버튼 -->
+        <Button Grid.Row="12"
+                Content="로그인"
+                Command="{Binding LoginCommand}"
+                Click="LoginButton_Click"
+                Style="{StaticResource PrimaryButton}"
+                Padding="0,14"/>
+
+        <!-- 오류 메시지 -->
+        <TextBlock Grid.Row="14"
+                   Text="{Binding ErrorMessage}"
+                   Foreground="{StaticResource ErrorBrush}"
+                   FontFamily="{StaticResource AppFont}"
+                   FontSize="13"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ErrorMessage}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+</Window>
