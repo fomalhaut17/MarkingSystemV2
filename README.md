@@ -68,3 +68,31 @@ git push --follow-tags
 ## UI에서 현재 버전 확인
 
 메인 화면 하단 상태바 우측에 `v0.1.x` 형태로 표시됩니다. 테스터/사용자가 알려주면 개발팀이 git tag 목록과 비교해 차이를 확인합니다.
+
+## 배포 (.NET 런타임 미설치 PC용 단일 exe)
+
+`build-release.bat`이 환경별 단일 exe + ZIP을 만듭니다.
+
+```bash
+build-release.bat local     # Mock 서버용 (테스터)
+build-release.bat prod      # wizMES 실서버용 (운영)
+```
+
+**결과물**
+```
+dist/
+├── local/                            # 또는 prod/
+│   ├── MarkingSystemV2.exe          (~70MB, 단일 exe, .NET 런타임 포함)
+│   ├── appsettings.json             {"AppMode":"local"}
+│   └── appsettings.local.json       (선택된 환경의 설정만 남음)
+└── MarkingSystemV2-local-v0.1.x-yyyyMMdd-HHmm.zip
+```
+
+ZIP을 그대로 테스터/현장에 전달하면 됩니다. 압축 풀고 `MarkingSystemV2.exe` 더블클릭으로 실행.
+
+### 배포 빌드 메커니즘
+- `<SelfContained>true</SelfContained>` — .NET 런타임을 exe에 포함
+- `<PublishSingleFile>true</PublishSingleFile>` — 모든 dll을 exe로 묶음
+- `<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>` — WPF native dll까지 포함
+- `<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>` — exe 압축 (~150MB → ~70MB)
+- exe에는 git tag로 박힌 버전(예: `0.1.3+SHA`)이 자동 포함됨 (우클릭 → 속성 → 자세히)
