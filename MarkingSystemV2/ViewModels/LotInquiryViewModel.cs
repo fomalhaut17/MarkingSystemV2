@@ -38,6 +38,7 @@ public sealed class LotInquiryViewModel : ObservableObject
     private ConditionRow _rowGuagePosit     = Empty();
 
     // 가스조건
+    private ConditionRow _rowGasDelay       = Empty();
     private ConditionRow _rowGasTime        = Empty();
     private ConditionRow _rowGasPress       = Empty();
     private ConditionRow _rowGasPosit       = Empty();
@@ -124,6 +125,7 @@ public sealed class LotInquiryViewModel : ObservableObject
     public ConditionRow RowGuagePosit     { get => _rowGuagePosit;     private set => SetField(ref _rowGuagePosit, value); }
 
     // 가스조건
+    public ConditionRow RowGasDelay       { get => _rowGasDelay;       private set => SetField(ref _rowGasDelay, value); }
     public ConditionRow RowGasTime        { get => _rowGasTime;        private set => SetField(ref _rowGasTime, value); }
     public ConditionRow RowGasPress       { get => _rowGasPress;       private set => SetField(ref _rowGasPress, value); }
     public ConditionRow RowGasPosit       { get => _rowGasPosit;       private set => SetField(ref _rowGasPosit, value); }
@@ -152,7 +154,7 @@ public sealed class LotInquiryViewModel : ObservableObject
         IsError       = false;
         IsBusy        = true;
 
-        var (context, condition, error) = await _api.LookupByLotAsync(LotNo.Trim());
+        var (context, condition, defaults, error) = await _api.LookupByLotAsync(LotNo.Trim());
 
         IsBusy = false;
 
@@ -165,7 +167,7 @@ public sealed class LotInquiryViewModel : ObservableObject
         }
 
         ApplyContext(context!);
-        ApplyCondition(condition);
+        ApplyCondition(condition, defaults);
     }
 
     private void ApplyContext(LotContextInfo ctx)
@@ -181,43 +183,65 @@ public sealed class LotInquiryViewModel : ObservableObject
         MarkingEquip  = ctx.MarkingEquip;
     }
 
-    private void ApplyCondition(InjectionCondition? c)
+    private void ApplyCondition(InjectionCondition? c, InjectionCondition? d)
     {
-        RowInjectTemp     = Row(c?.InjectH1,     c?.InjectH2,     c?.InjectH3,     c?.InjectH4,     c?.InjectH5);
+        RowInjectTemp     = Row(d?.InjectH1,     d?.InjectH2,     d?.InjectH3,     d?.InjectH4,     d?.InjectH5,
+                                c?.InjectH1,     c?.InjectH2,     c?.InjectH3,     c?.InjectH4,     c?.InjectH5);
         RowInjectEmpty    = Empty();
-        RowInjectPressure = Row(c?.InjectPress1, c?.InjectPress2, c?.InjectPress3, c?.InjectPress4, c?.InjectPress5);
-        RowInjectSpeed    = Row(c?.InjectSpeed1, c?.InjectSpeed2, c?.InjectSpeed3, c?.InjectSpeed4, c?.InjectSpeed5);
-        RowInjectTime     = Row(c?.InjectTime1,  c?.InjectTime2,  c?.InjectTime3,  c?.InjectTime4,  c?.InjectTime5);
+        RowInjectPressure = Row(d?.InjectPress1, d?.InjectPress2, d?.InjectPress3, d?.InjectPress4, d?.InjectPress5,
+                                c?.InjectPress1, c?.InjectPress2, c?.InjectPress3, c?.InjectPress4, c?.InjectPress5);
+        RowInjectSpeed    = Row(d?.InjectSpeed1, d?.InjectSpeed2, d?.InjectSpeed3, d?.InjectSpeed4, d?.InjectSpeed5,
+                                c?.InjectSpeed1, c?.InjectSpeed2, c?.InjectSpeed3, c?.InjectSpeed4, c?.InjectSpeed5);
+        RowInjectTime     = Row(d?.InjectTime1,  d?.InjectTime2,  d?.InjectTime3,  d?.InjectTime4,  d?.InjectTime5,
+                                c?.InjectTime1,  c?.InjectTime2,  c?.InjectTime3,  c?.InjectTime4,  c?.InjectTime5);
 
-        RowGuagePressure  = Row(c?.GuagePress1,  c?.GuagePress2,  c?.GuagePress3,  c?.GuagePress4,  c?.GuagePress5);
-        RowGuageSpeed     = Row(c?.GuageSpeed1,  c?.GuageSpeed2,  c?.GuageSpeed3,  c?.GuageSpeed4,  c?.GuageSpeed5);
-        RowGuagePosit     = Row(c?.GuagePosit1,  c?.GuagePosit2,  c?.GuagePosit3,  c?.GuagePosit4,  c?.GuagePosit5);
+        RowGuagePressure  = Row(d?.GuagePress1,  d?.GuagePress2,  d?.GuagePress3,  d?.GuagePress4,  d?.GuagePress5,
+                                c?.GuagePress1,  c?.GuagePress2,  c?.GuagePress3,  c?.GuagePress4,  c?.GuagePress5);
+        RowGuageSpeed     = Row(d?.GuageSpeed1,  d?.GuageSpeed2,  d?.GuageSpeed3,  d?.GuageSpeed4,  d?.GuageSpeed5,
+                                c?.GuageSpeed1,  c?.GuageSpeed2,  c?.GuageSpeed3,  c?.GuageSpeed4,  c?.GuageSpeed5);
+        RowGuagePosit     = Row(d?.GuagePosit1,  d?.GuagePosit2,  d?.GuagePosit3,  d?.GuagePosit4,  d?.GuagePosit5,
+                                c?.GuagePosit1,  c?.GuagePosit2,  c?.GuagePosit3,  c?.GuagePosit4,  c?.GuagePosit5);
 
-        RowGasTime        = Row(c?.GasTime1,     c?.GasTime2,     c?.GasTime3,     c?.GasTime4,     c?.GasTime5);
-        RowGasPress       = Row(c?.GasPress1,    c?.GasPress2,    c?.GasPress3,    c?.GasPress4,    c?.GasPress5);
-        RowGasPosit       = Row(c?.GasPosit1,    c?.GasPosit2,    c?.GasPosit3,    c?.GasPosit4,    c?.GasPosit5);
+        RowGasDelay       = Row(d?.GasDelay1,    d?.GasDelay2,    d?.GasDelay3,    d?.GasDelay4,    d?.GasDelay5,
+                                c?.GasDelay1,    c?.GasDelay2,    c?.GasDelay3,    c?.GasDelay4,    c?.GasDelay5);
+        RowGasTime        = Row(d?.GasTime1,     d?.GasTime2,     d?.GasTime3,     d?.GasTime4,     d?.GasTime5,
+                                c?.GasTime1,     c?.GasTime2,     c?.GasTime3,     c?.GasTime4,     c?.GasTime5);
+        RowGasPress       = Row(d?.GasPress1,    d?.GasPress2,    d?.GasPress3,    d?.GasPress4,    d?.GasPress5,
+                                c?.GasPress1,    c?.GasPress2,    c?.GasPress3,    c?.GasPress4,    c?.GasPress5);
+        RowGasPosit       = Row(d?.GasPosit1,    d?.GasPosit2,    d?.GasPosit3,    d?.GasPosit4,    d?.GasPosit5,
+                                c?.GasPosit1,    c?.GasPosit2,    c?.GasPosit3,    c?.GasPosit4,    c?.GasPosit5);
 
-        RowHoldPress      = Row(c?.HoldPress1,   c?.HoldPress2,   c?.HoldPress3,   c?.HoldPress4,   c?.HoldPress5);
-        RowHoldSpeed      = Row(c?.HoldSpeed1,   c?.HoldSpeed2,   c?.HoldSpeed3,   c?.HoldSpeed4,   c?.HoldSpeed5);
-        RowHoldTime       = Row(c?.HoldTime1,    c?.HoldTime2,    c?.HoldTime3,    c?.HoldTime4,    c?.HoldTime5);
+        RowHoldPress      = Row(d?.HoldPress1,   d?.HoldPress2,   d?.HoldPress3,   d?.HoldPress4,   d?.HoldPress5,
+                                c?.HoldPress1,   c?.HoldPress2,   c?.HoldPress3,   c?.HoldPress4,   c?.HoldPress5);
+        RowHoldSpeed      = Row(d?.HoldSpeed1,   d?.HoldSpeed2,   d?.HoldSpeed3,   d?.HoldSpeed4,   d?.HoldSpeed5,
+                                c?.HoldSpeed1,   c?.HoldSpeed2,   c?.HoldSpeed3,   c?.HoldSpeed4,   c?.HoldSpeed5);
+        RowHoldTime       = Row(d?.HoldTime1,    d?.HoldTime2,    d?.HoldTime3,    d?.HoldTime4,    d?.HoldTime5,
+                                c?.HoldTime1,    c?.HoldTime2,    c?.HoldTime3,    c?.HoldTime4,    c?.HoldTime5);
 
-        RowHotRunnerA     = Row(c?.HotRunnerA1,  c?.HotRunnerA2,  c?.HotRunnerA3,  c?.HotRunnerA4,  c?.HotRunnerA5);
-        RowHotRunnerB     = Row(c?.HotRunnerB1,  c?.HotRunnerB2,  c?.HotRunnerB3,  c?.HotRunnerB4,  c?.HotRunnerB5);
+        RowHotRunnerA     = Row(d?.HotRunnerA1,  d?.HotRunnerA2,  d?.HotRunnerA3,  d?.HotRunnerA4,  d?.HotRunnerA5,
+                                c?.HotRunnerA1,  c?.HotRunnerA2,  c?.HotRunnerA3,  c?.HotRunnerA4,  c?.HotRunnerA5);
+        RowHotRunnerB     = Row(d?.HotRunnerB1,  d?.HotRunnerB2,  d?.HotRunnerB3,  d?.HotRunnerB4,  d?.HotRunnerB5,
+                                c?.HotRunnerB1,  c?.HotRunnerB2,  c?.HotRunnerB3,  c?.HotRunnerB4,  c?.HotRunnerB5);
 
-        RowCoolTime       = Row(c?.CoolTime1,    c?.CoolTime2,    c?.CoolTime3,    c?.CoolTime4,    c?.CoolTime5);
-        RowKumProtect     = Row(c?.KumProtect1,  c?.KumProtect2,  c?.KumProtect3,  c?.KumProtect4,  c?.KumProtect5);
-        RowGasPostion     = Row(c?.GasPostion1,  c?.GasPostion2,  c?.GasPostion3,  c?.GasPostion4,  c?.GasPostion5);
+        RowCoolTime       = Row(d?.CoolTime1,    d?.CoolTime2,    d?.CoolTime3,    d?.CoolTime4,    d?.CoolTime5,
+                                c?.CoolTime1,    c?.CoolTime2,    c?.CoolTime3,    c?.CoolTime4,    c?.CoolTime5);
+        RowKumProtect     = Row(d?.KumProtect1,  d?.KumProtect2,  d?.KumProtect3,  d?.KumProtect4,  d?.KumProtect5,
+                                c?.KumProtect1,  c?.KumProtect2,  c?.KumProtect3,  c?.KumProtect4,  c?.KumProtect5);
+        RowGasPostion     = Row(d?.GasPostion1,  d?.GasPostion2,  d?.GasPostion3,  d?.GasPostion4,  d?.GasPostion5,
+                                c?.GasPostion1,  c?.GasPostion2,  c?.GasPostion3,  c?.GasPostion4,  c?.GasPostion5);
     }
 
     private void ClearResult()
     {
         CarModel = ItemName = ItemCode = MaterialName = Grade = null;
         ProductionDate = InjectionEquip = MarkingDate = MarkingEquip = null;
-        ApplyCondition(null);
+        ApplyCondition(null, null);
     }
 
     private static ConditionRow Empty() => new();
 
-    private static ConditionRow Row(string? v1, string? v2, string? v3, string? v4, string? v5) =>
-        new() { Val1 = v1, Val2 = v2, Val3 = v3, Val4 = v4, Val5 = v5 };
+    private static ConditionRow Row(string? s1, string? s2, string? s3, string? s4, string? s5,
+                                    string? v1, string? v2, string? v3, string? v4, string? v5) =>
+        new() { Std1 = s1, Std2 = s2, Std3 = s3, Std4 = s4, Std5 = s5,
+                Val1 = v1, Val2 = v2, Val3 = v3, Val4 = v4, Val5 = v5 };
 }

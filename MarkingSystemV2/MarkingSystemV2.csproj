@@ -11,10 +11,17 @@
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+    <!-- 버전은 MinVer가 git tag(vX.Y.Z)에서 자동 주입. 태그 없는 빌드는 0.0.0-alpha.0.* 폴백 -->
+    <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
 
   <ItemGroup>
     <Resource Include="Fonts\*.ttf"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup>

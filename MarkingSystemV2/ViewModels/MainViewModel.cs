@@ -20,6 +20,8 @@ public sealed class MainViewModel : ObservableObject
 
     public string TodayDisplay => DateTime.Now.ToString("yyyy년 M월 d일");
 
+    public string CurrentVersion => $"v{AppVersion.Current}";
+
     public RelayCommand LogoutCommand { get; }
 
     public MainViewModel(AuthService auth, MarkingApiService markingApi)

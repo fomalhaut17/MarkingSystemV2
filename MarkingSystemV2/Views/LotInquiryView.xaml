@@ -81,7 +81,7 @@
         <!-- ── 메인 콘텐츠 (좌측 정보 + 우측 그리드) ── -->
         <Grid Grid.Row="2" Margin="24,0,24,24">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="320"/>
                 <ColumnDefinition Width="16"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -230,9 +230,13 @@
             </StackPanel>
 
             <!-- ── 우측: 사출 조건 그리드 (Grid 셀병합) ── -->
-            <Border Grid.Column="2"
-                    BorderBrush="{StaticResource BorderBrush}"
-                    BorderThickness="1,1,0,0">
+            <ScrollViewer Grid.Column="2"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <Border BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1,1,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
@@ -256,20 +260,21 @@
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="90"/>
                         <ColumnDefinition Width="130"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- ─── 헤더 행 0~1 ─── -->
@@ -310,24 +315,24 @@
                     <Border Grid.Row="7" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
                         <TextBlock Text="계량조건" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="10" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
+                    <Border Grid.Row="10" Grid.Column="0" Grid.RowSpan="4" Style="{StaticResource GroupCell}">
                         <TextBlock Text="가스조건" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="13" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
+                    <Border Grid.Row="14" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
                         <TextBlock Text="보압" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="16" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource GroupCell}">
+                    <Border Grid.Row="17" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource GroupCell}">
                         <TextBlock Text="HOT RUNNER" Style="{StaticResource CellText}"/>
                     </Border>
 
                     <!-- 단일 행 그룹 (Col 0~1 병합) -->
-                    <Border Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
+                    <Border Grid.Row="19" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
                         <TextBlock Text="냉각시간" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="19" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
+                    <Border Grid.Row="20" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
                         <TextBlock Text="금형보호" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="20" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
+                    <Border Grid.Row="21" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
                         <TextBlock Text="가스위치" Style="{StaticResource CellText}"/>
                     </Border>
 
@@ -340,14 +345,15 @@
                     <Border Grid.Row="7"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
                     <Border Grid.Row="8"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="속도(%)"       Style="{StaticResource CellText}"/></Border>
                     <Border Grid.Row="9"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="위치(mm)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간(초)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="위치(mm)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="속도(%)"       Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간(초)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="A"             Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="B"             Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="딜레이(초)"    Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간(초)"      Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="위치(mm)"      Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="속도(%)"       Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간(초)"      Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="A"             Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="B"             Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 사출조건 온도 (Row 2) ─── -->
                     <Border Grid.Row="2" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowInjectTemp.Std1}" Style="{StaticResource CellText}"/></Border>
@@ -445,139 +451,152 @@
                     <Border Grid.Row="9" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGuagePosit.Std5}" Style="{StaticResource CellText}"/></Border>
                     <Border Grid.Row="9" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGuagePosit.Val5}" Style="{StaticResource CellText}"/></Border>
 
-                    <!-- ─── 데이터 셀: 가스조건 시간 (Row 10) ─── -->
-                    <Border Grid.Row="10" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <!-- ─── 데이터 셀: 가스조건 딜레이 (Row 10) ─── -->
+                    <Border Grid.Row="10" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasDelay.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasDelay.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasDelay.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasDelay.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasDelay.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasDelay.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasDelay.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasDelay.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasDelay.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasDelay.Val5}" Style="{StaticResource CellText}"/></Border>
+
+                    <!-- ─── 데이터 셀: 가스조건 시간 (Row 11) ─── -->
+                    <Border Grid.Row="11" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasTime.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasTime.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스조건 압력 (Row 11) ─── -->
-                    <Border Grid.Row="11" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPress.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPress.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스조건 위치 (Row 12) ─── -->
-                    <Border Grid.Row="12" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPosit.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPosit.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 보압 압력 (Row 13) ─── -->
-                    <Border Grid.Row="13" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldPress.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldPress.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 보압 속도 (Row 14) ─── -->
-                    <Border Grid.Row="14" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldSpeed.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldSpeed.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 보압 시간 (Row 15) ─── -->
-                    <Border Grid.Row="15" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHoldTime.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHoldTime.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: HOT RUNNER A (Row 16) ─── -->
-                    <Border Grid.Row="16" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerA.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerA.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: HOT RUNNER B (Row 17) ─── -->
-                    <Border Grid.Row="17" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowHotRunnerB.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowHotRunnerB.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 냉각시간 (Row 18) ─── -->
-                    <Border Grid.Row="18" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowCoolTime.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowCoolTime.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 금형보호 (Row 19) ─── -->
-                    <Border Grid.Row="19" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowKumProtect.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowKumProtect.Val5}" Style="{StaticResource CellText}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스위치 (Row 20) ─── -->
-                    <Border Grid.Row="20" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val1}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val2}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val3}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val4}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std5}" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val1}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val2}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val3}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val4}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="10" Style="{StaticResource StdCell}"><TextBlock Text="{Binding RowGasPostion.Std5}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="21" Grid.Column="11" Style="{StaticResource ValCell}"><TextBlock Text="{Binding RowGasPostion.Val5}" Style="{StaticResource CellText}"/></Border>
                 </Grid>
-            </Border>
+                </Border>
+            </ScrollViewer>
 
         </Grid>
     </Grid>

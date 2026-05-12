@@ -137,6 +137,14 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
+
+                <!-- 우측: 현재 버전 표시 -->
+                <TextBlock HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontFamily="{StaticResource AppFont}"
+                           FontSize="12"
+                           Foreground="{StaticResource TextSecondary}"
+                           Text="{Binding CurrentVersion}"/>
             </Grid>
         </Border>
 

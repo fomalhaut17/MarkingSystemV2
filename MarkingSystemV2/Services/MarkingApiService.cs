@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using MarkingSystemV2.Models;
 
@@ -25,20 +26,11 @@ public sealed class MarkingApiService
         if (resp == null)
             return (null, "서버 연결에 실패했습니다.");
 
-        if (resp.Ok == false)
-            return (null, MapBarcodeErrorCode(resp.Message));
-
-        if (resp.BarcodeInfo == null)
+        if (resp.BarcodeInfo == null || string.IsNullOrWhiteSpace(resp.BarcodeInfo.ItemName))
             return (null, "조회 결과가 없습니다.");
 
         return (resp.BarcodeInfo, null);
     }
-
-    private static string MapBarcodeErrorCode(string? code) => code switch
-    {
-        "MISSING_BARCODE" => "바코드를 입력하세요.",
-        _                 => $"조회에 실패했습니다. ({code})"
-    };
 
     // ── 검사 결과 저장 ─────────────────────────────────────────────────────────
 
@@ -67,7 +59,8 @@ public sealed class MarkingApiService
 
     // ── 생산 Lot 조회 ─────────────────────────────────────────────────────────
 
-    public async Task<(LotContextInfo? context, InjectionCondition? condition, string? error)>
+    public async Task<(LotContextInfo? context, InjectionCondition? condition,
+                       InjectionCondition? defaults, string? error)>
         LookupByLotAsync(string barcode)
     {
         var body = new LotRequest(barcode, _settings.LoginCompany);
@@ -75,16 +68,13 @@ public sealed class MarkingApiService
             "/api/mantec/lot/latest_inject_by_barcode", body);
 
         if (resp == null)
-            return (null, null, "서버 연결에 실패했습니다.");
-
-        if (resp.Ok == false)
-            return (null, null, MapLotErrorCode(resp.Message));
+            return (null, null, null, "서버 연결에 실패했습니다.");
 
         if (resp.LotContext == null || string.IsNullOrWhiteSpace(resp.LotContext.Bno))
-            return (null, null, "조회 결과가 없습니다.");
+            return (null, null, null, "조회 결과가 없습니다.");
 
         var condition = resp.Main?.Count > 0 ? resp.Main[0] : null;
-        return (resp.LotContext, condition, null);
+        return (resp.LotContext, condition, resp.InjectDefaults, null);
     }
 
     private static string MapSaveErrorCode(string? code) => code switch
@@ -92,16 +82,8 @@ public sealed class MarkingApiService
         "MISSING_OR_INVALID_ITEMS" => "저장 항목이 올바르지 않습니다.",
         "EMPTY_ITEMS"              => "저장할 항목이 없습니다.",
         "SERVICE_NOT_AVAILABLE"    => "서버 오류가 발생했습니다. 잠시 후 다시 시도하세요.",
-        null or ""                 => "저장에 실패했습니다.",
+        null or "" or "OK"         => "저장에 실패했습니다.",
         _                          => $"저장에 실패했습니다. ({code})"
-    };
-
-    private static string MapLotErrorCode(string? code) => code switch
-    {
-        "MISSING_BARCODE"        => "바코드를 입력하세요.",
-        "MISSING_LOGIN_COMPANY"  => "업체코드가 설정되지 않았습니다.",
-        "SERVICE_NOT_AVAILABLE"  => "서버 오류가 발생했습니다. 잠시 후 다시 시도하세요.",
-        _                        => $"조회에 실패했습니다. ({code})"
     };
 
     // ── DTOs ──────────────────────────────────────────────────────────────────
@@ -116,17 +98,16 @@ public sealed class MarkingApiService
 
     private sealed class LotApiResponse
     {
-        [JsonPropertyName("ok")]          public bool?                    Ok         { get; init; }
-        [JsonPropertyName("message")]     public string?                  Message    { get; init; }
-        [JsonPropertyName("LOT_CONTEXT")] public LotContextInfo?          LotContext { get; init; }
-        [JsonPropertyName("MAIN")]        public List<InjectionCondition>? Main      { get; init; }
+        [JsonPropertyName("LOT_CONTEXT")]      public LotContextInfo?            LotContext     { get; init; }
+        [JsonPropertyName("MAIN")]             public List<InjectionCondition>?  Main           { get; init; }
+        [JsonPropertyName("INJECT_DEFAULTS")]  public InjectionCondition?        InjectDefaults { get; init; }
+        [JsonPropertyName("INJECT_RN_LABELS")] public Dictionary<string,string>? InjectRnLabels { get; init; }
     }
 
     private sealed class LookupResponse
     {
-        [JsonPropertyName("ok")]           public bool?       Ok          { get; init; }
-        [JsonPropertyName("message")]      public string?     Message     { get; init; }
-        [JsonPropertyName("barcode_info")] public BarcodeInfo? BarcodeInfo { get; init; }
+        [JsonPropertyName("barcode_info")] public BarcodeInfo?        BarcodeInfo { get; init; }
+        [JsonPropertyName("lot_no_list")]  public List<LotNoListItem>? LotNoList   { get; init; }
     }
 
     private sealed record InspectionItem(
@@ -140,7 +121,10 @@ public sealed class MarkingApiService
 
     private sealed class ApiResultResponse
     {
-        [JsonPropertyName("ok")]      public bool    Ok      { get; init; }
-        [JsonPropertyName("message")] public string? Message { get; init; }
+        [JsonPropertyName("ok")]             public bool                  Ok             { get; init; }
+        [JsonPropertyName("message")]        public string?               Message        { get; init; }
+        [JsonPropertyName("requestedCount")] public int?                  RequestedCount { get; init; }
+        [JsonPropertyName("savedCount")]     public int?                  SavedCount     { get; init; }
+        [JsonPropertyName("resultList")]     public List<JsonElement>?    ResultList     { get; init; }
     }
 }
