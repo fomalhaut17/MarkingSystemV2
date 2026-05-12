@@ -14,9 +14,9 @@ public sealed class MarkingInquiryViewModel : ObservableObject
     private bool    _isError        = false;
 
     private BarcodeInfo? _barcodeInfo;
-    private string? _itemName;
-    private string? _manufactureDate;
-    private string? _quantity;
+    private string? _itemnam;
+    private string? _endIDay;
+    private string? _endICnt;
     private string? _lotNoHead;
     private string? _lotMax;
     private string? _startSerial;
@@ -82,22 +82,22 @@ public sealed class MarkingInquiryViewModel : ObservableObject
 
     public string? DisplayStatus => IsBusy ? "처리 중..." : StatusMessage;
 
-    public string? ItemName
+    public string? Itemnam
     {
-        get => _itemName;
-        private set => SetField(ref _itemName, value);
+        get => _itemnam;
+        private set => SetField(ref _itemnam, value);
     }
 
-    public string? ManufactureDate
+    public string? EndIDay
     {
-        get => _manufactureDate;
-        private set => SetField(ref _manufactureDate, value);
+        get => _endIDay;
+        private set => SetField(ref _endIDay, value);
     }
 
-    public string? Quantity
+    public string? EndICnt
     {
-        get => _quantity;
-        private set => SetField(ref _quantity, value);
+        get => _endICnt;
+        private set => SetField(ref _endICnt, value);
     }
 
     public string? LotNoHead
@@ -172,9 +172,9 @@ public sealed class MarkingInquiryViewModel : ObservableObject
     private void ApplyResult(BarcodeInfo info)
     {
         _barcodeInfo    = info;
-        ItemName        = info.ItemName;
-        ManufactureDate = info.EndIDay;
-        Quantity        = info.EndICnt;
+        Itemnam         = info.Itemnam;
+        EndIDay         = info.EndIDay;
+        EndICnt         = info.EndICnt;
         LotNoHead       = info.LotNoHead?.TrimStart();
         LotMax          = info.LotMax;
 
@@ -190,9 +190,9 @@ public sealed class MarkingInquiryViewModel : ObservableObject
     private void ClearResult()
     {
         _barcodeInfo    = null;
-        ItemName        = null;
-        ManufactureDate = null;
-        Quantity        = null;
+        Itemnam         = null;
+        EndIDay         = null;
+        EndICnt         = null;
         LotNoHead       = null;
         LotMax          = null;
         StartSerial     = null;

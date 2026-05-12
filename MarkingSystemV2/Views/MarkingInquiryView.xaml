@@ -34,7 +34,7 @@
 
             <!-- ── 품명 ── -->
             <TextBlock Text="품명" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
-            <TextBox Text="{Binding ItemName, Mode=OneWay}"
+            <TextBox Text="{Binding Itemnam, Mode=OneWay}"
                      Height="40"
                      Style="{StaticResource ReadOnlyTextBox}"
                      IsTabStop="False"
@@ -42,7 +42,7 @@
 
             <!-- ── 제조일자 ── -->
             <TextBlock Text="제조일자" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
-            <TextBox Text="{Binding ManufactureDate, Mode=OneWay}"
+            <TextBox Text="{Binding EndIDay, Mode=OneWay}"
                      Height="40"
                      Style="{StaticResource ReadOnlyTextBox}"
                      IsTabStop="False"
@@ -50,7 +50,7 @@
 
             <!-- ── 용기 내 수량 ── -->
             <TextBlock Text="용기 내 수량" Style="{StaticResource LabelText}" Margin="0,0,0,4"/>
-            <TextBox Text="{Binding Quantity, Mode=OneWay}"
+            <TextBox Text="{Binding EndICnt, Mode=OneWay}"
                      Height="40"
                      Style="{StaticResource ReadOnlyTextBox}"
                      IsTabStop="False"

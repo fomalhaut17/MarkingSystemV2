@@ -13,17 +13,17 @@ public sealed class LotInquiryViewModel : ObservableObject
     private bool    _isError;
 
     // 제품정보
-    private string? _carModel;
-    private string? _itemName;
-    private string? _itemCode;
-    private string? _materialName;
-    private string? _grade;
+    private string? _carnam;
+    private string? _itemnam;
+    private string? _itemcod;
+    private string? _rwMatItemnam;
+    private string? _rwMatGrNm;
 
     // 생산이력
-    private string? _productionDate;
-    private string? _injectionEquip;
-    private string? _markingDate;
-    private string? _markingEquip;
+    private string? _proDate;
+    private string? _proMechnam;
+    private string? _engraveProDate;
+    private string? _engraveMechnam;
 
     // 사출조건
     private ConditionRow _rowInjectTemp     = Empty();
@@ -100,17 +100,17 @@ public sealed class LotInquiryViewModel : ObservableObject
     public string? DisplayStatus => IsBusy ? "처리 중..." : StatusMessage;
 
     // 제품정보
-    public string? CarModel     { get => _carModel;     private set => SetField(ref _carModel, value); }
-    public string? ItemName     { get => _itemName;     private set => SetField(ref _itemName, value); }
-    public string? ItemCode     { get => _itemCode;     private set => SetField(ref _itemCode, value); }
-    public string? MaterialName { get => _materialName; private set => SetField(ref _materialName, value); }
-    public string? Grade        { get => _grade;        private set => SetField(ref _grade, value); }
+    public string? Carnam       { get => _carnam;       private set => SetField(ref _carnam, value); }
+    public string? Itemnam      { get => _itemnam;      private set => SetField(ref _itemnam, value); }
+    public string? Itemcod      { get => _itemcod;      private set => SetField(ref _itemcod, value); }
+    public string? RwMatItemnam { get => _rwMatItemnam; private set => SetField(ref _rwMatItemnam, value); }
+    public string? RwMatGrNm    { get => _rwMatGrNm;    private set => SetField(ref _rwMatGrNm, value); }
 
     // 생산이력
-    public string? ProductionDate { get => _productionDate; private set => SetField(ref _productionDate, value); }
-    public string? InjectionEquip { get => _injectionEquip; private set => SetField(ref _injectionEquip, value); }
-    public string? MarkingDate    { get => _markingDate;    private set => SetField(ref _markingDate, value); }
-    public string? MarkingEquip   { get => _markingEquip;   private set => SetField(ref _markingEquip, value); }
+    public string? ProDate        { get => _proDate;        private set => SetField(ref _proDate, value); }
+    public string? ProMechnam     { get => _proMechnam;     private set => SetField(ref _proMechnam, value); }
+    public string? EngraveProDate { get => _engraveProDate; private set => SetField(ref _engraveProDate, value); }
+    public string? EngraveMechnam { get => _engraveMechnam; private set => SetField(ref _engraveMechnam, value); }
 
     // 사출조건
     public ConditionRow RowInjectTemp     { get => _rowInjectTemp;     private set => SetField(ref _rowInjectTemp, value); }
@@ -172,15 +172,15 @@ public sealed class LotInquiryViewModel : ObservableObject
 
     private void ApplyContext(LotContextInfo ctx)
     {
-        CarModel      = ctx.CarName;
-        ItemName      = ctx.ItemName;
-        ItemCode      = ctx.ItemCode;
-        MaterialName  = ctx.MaterialName;
-        Grade         = ctx.Grade;
-        ProductionDate = ctx.ProductionDate;
-        InjectionEquip = ctx.InjectionEquip;
-        MarkingDate   = ctx.MarkingDate;
-        MarkingEquip  = ctx.MarkingEquip;
+        Carnam         = ctx.Carnam;
+        Itemnam        = ctx.Itemnam;
+        Itemcod        = ctx.Itemcod;
+        RwMatItemnam   = ctx.RwMatItemnam;
+        RwMatGrNm      = ctx.RwMatGrNm;
+        ProDate        = ctx.ProDate;
+        ProMechnam     = ctx.ProMechnam;
+        EngraveProDate = ctx.EngraveProDate;
+        EngraveMechnam = ctx.EngraveMechnam;
     }
 
     private void ApplyCondition(InjectionCondition? c, InjectionCondition? d)
@@ -233,8 +233,8 @@ public sealed class LotInquiryViewModel : ObservableObject
 
     private void ClearResult()
     {
-        CarModel = ItemName = ItemCode = MaterialName = Grade = null;
-        ProductionDate = InjectionEquip = MarkingDate = MarkingEquip = null;
+        Carnam = Itemnam = Itemcod = RwMatItemnam = RwMatGrNm = null;
+        ProDate = ProMechnam = EngraveProDate = EngraveMechnam = null;
         ApplyCondition(null, null);
     }
 

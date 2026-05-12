@@ -26,7 +26,7 @@ public sealed class MarkingApiService
         if (resp == null)
             return (null, "서버 연결에 실패했습니다.");
 
-        if (resp.BarcodeInfo == null || string.IsNullOrWhiteSpace(resp.BarcodeInfo.ItemName))
+        if (resp.BarcodeInfo == null || string.IsNullOrWhiteSpace(resp.BarcodeInfo.Itemnam))
             return (null, "조회 결과가 없습니다.");
 
         return (resp.BarcodeInfo, null);
@@ -88,43 +88,38 @@ public sealed class MarkingApiService
 
     // ── DTOs ──────────────────────────────────────────────────────────────────
 
-    private sealed record LookupRequest(
-        [property: JsonPropertyName("barcode")]       string Barcode,
-        [property: JsonPropertyName("login_company")] string LoginCompany);
+    private sealed record LookupRequest(string Barcode, string LoginCompany);
 
-    private sealed record LotRequest(
-        [property: JsonPropertyName("barcode")]       string Barcode,
-        [property: JsonPropertyName("login_company")] string LoginCompany);
+    private sealed record LotRequest(string Barcode, string LoginCompany);
 
     private sealed class LotApiResponse
     {
-        [JsonPropertyName("LOT_CONTEXT")]      public LotContextInfo?            LotContext     { get; init; }
-        [JsonPropertyName("MAIN")]             public List<InjectionCondition>?  Main           { get; init; }
-        [JsonPropertyName("INJECT_DEFAULTS")]  public InjectionCondition?        InjectDefaults { get; init; }
-        [JsonPropertyName("INJECT_RN_LABELS")] public Dictionary<string,string>? InjectRnLabels { get; init; }
+        public LotContextInfo?            LotContext     { get; init; }
+        public List<InjectionCondition>?  Main           { get; init; }
+        public InjectionCondition?        InjectDefaults { get; init; }
+        public Dictionary<string,string>? InjectRnLabels { get; init; }
     }
 
     private sealed class LookupResponse
     {
-        [JsonPropertyName("barcode_info")] public BarcodeInfo?        BarcodeInfo { get; init; }
-        [JsonPropertyName("lot_no_list")]  public List<LotNoListItem>? LotNoList   { get; init; }
+        public BarcodeInfo?         BarcodeInfo { get; init; }
+        public List<LotNoListItem>? LotNoList   { get; init; }
     }
 
-    private sealed record InspectionItem(
-        [property: JsonPropertyName("barcode")]          string Barcode,
-        [property: JsonPropertyName("lot_no")]           string LotNo,
-        [property: JsonPropertyName("insp_result_code")] string InspResultCode);
+    private sealed record InspectionItem(string Barcode, string LotNo, string InspResultCode);
 
     private sealed record SaveInspectionRequest(
-        [property: JsonPropertyName("inspection_list")] IReadOnlyList<InspectionItem> InspectionList,
-        [property: JsonPropertyName("login_company")]   string LoginCompany);
+        IReadOnlyList<InspectionItem> InspectionList,
+        string LoginCompany);
 
     private sealed class ApiResultResponse
     {
-        [JsonPropertyName("ok")]             public bool                  Ok             { get; init; }
-        [JsonPropertyName("message")]        public string?               Message        { get; init; }
-        [JsonPropertyName("requestedCount")] public int?                  RequestedCount { get; init; }
-        [JsonPropertyName("savedCount")]     public int?                  SavedCount     { get; init; }
-        [JsonPropertyName("resultList")]     public List<JsonElement>?    ResultList     { get; init; }
+        public bool    Ok      { get; init; }
+        public string? Message { get; init; }
+
+        // 서버 응답이 camelCase (snake_case 정책에서 벗어난 예외)
+        [JsonPropertyName("requestedCount")] public int?               RequestedCount { get; init; }
+        [JsonPropertyName("savedCount")]     public int?               SavedCount     { get; init; }
+        [JsonPropertyName("resultList")]     public List<JsonElement>? ResultList     { get; init; }
     }
 }
