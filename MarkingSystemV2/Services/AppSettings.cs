@@ -20,7 +20,8 @@ public sealed class AppSettings
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         var modeSelectorPath = Path.Combine(dir, "appsettings.json");
-        var mode = "local";
+        // appsettings.json 없으면 prod 폴백 — 사용자에게 전달되는 빌드가 대부분 prod이므로
+        var mode = "prod";
         if (File.Exists(modeSelectorPath))
         {
             try
