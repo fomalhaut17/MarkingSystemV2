@@ -54,7 +54,8 @@ public sealed class AppSettings
 
 public sealed class ApiSettings
 {
-    [JsonPropertyName("BaseUrl")]      public string BaseUrl      { get; init; } = "http://localhost:47300";
-    [JsonPropertyName("AuthBaseUrl")]  public string AuthBaseUrl  { get; init; } = "http://localhost:47300";
+    // 기본값은 prod. appsettings.{mode}.json 누락 시에도 단일 exe만으로 prod 동작 가능.
+    [JsonPropertyName("BaseUrl")]      public string BaseUrl      { get; init; } = "https://wizmes.com";
+    [JsonPropertyName("AuthBaseUrl")]  public string AuthBaseUrl  { get; init; } = "https://wizmes.com";
     [JsonPropertyName("LoginCompany")] public string LoginCompany { get; init; } = "DEMO";
 }
