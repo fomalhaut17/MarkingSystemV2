@@ -36,5 +36,5 @@ else
     NEW_TAG="v${MAJOR}.${MINOR}.${NEW_PATCH}"
 fi
 
-git tag "$NEW_TAG"
+git tag -a "$NEW_TAG" -m "Auto bump to $NEW_TAG"
 echo "[hook] 자동 태그 생성: $NEW_TAG"
