@@ -47,9 +47,16 @@ if exist %OUT%\MarkingSystemV2.pdb del /f /q %OUT%\MarkingSystemV2.pdb
 echo [4/4] Creating ZIP archive...
 set ZIP=dist\MarkingSystemV2-%ENV%-%TAG%-%BUILDTIME%.zip
 if exist %ZIP% del /f /q %ZIP%
-powershell -NoProfile -Command "Compress-Archive -Path '%OUT%\*' -DestinationPath '%ZIP%'"
+
+REM Brief wait so publish/AV file handles can release
+timeout /t 2 /nobreak > nul
+
+powershell -NoProfile -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem; try { [System.IO.Compression.ZipFile]::CreateFromDirectory((Resolve-Path '%OUT%').Path, (Join-Path (Resolve-Path 'dist').Path '%ZIP:dist\=%')); exit 0 } catch { Write-Host ('ZIP error: ' + $_.Exception.Message) -ForegroundColor Red; exit 1 }"
 if errorlevel 1 (
-    echo ZIP failed.
+    echo.
+    echo ZIP failed. Likely cause: dist\%ENV%\MarkingSystemV2.exe is in use.
+    echo   - Close any running MarkingSystemV2.exe and retry.
+    echo   - Or zip dist\%ENV%\ manually.
     exit /b 1
 )
 
