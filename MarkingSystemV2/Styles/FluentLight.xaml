@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:b="clr-namespace:MarkingSystemV2.Services">
 
     <!-- ═══════════════════════════════════════════════════════
          CONVERTERS
@@ -161,6 +162,7 @@
     ═══════════════════════════════════════════════════════ -->
 
     <Style x:Key="ReadOnlyTextBox" TargetType="TextBox">
+        <Setter Property="b:SelectAllOnFocus.IsEnabled" Value="True"/>
         <Setter Property="Margin"                   Value="0"/>
         <Setter Property="Background"               Value="#F5F5F5"/>
         <Setter Property="Foreground"               Value="{StaticResource TextPrimary}"/>
