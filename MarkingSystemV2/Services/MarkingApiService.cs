@@ -60,7 +60,8 @@ public sealed class MarkingApiService
     // ── 생산 Lot 조회 ─────────────────────────────────────────────────────────
 
     public async Task<(LotContextInfo? context, InjectionCondition? condition,
-                       InjectionCondition? defaults, string? error)>
+                       InjectionCondition? defaults,
+                       Dictionary<string,string>? labels, string? error)>
         LookupByLotAsync(string barcode)
     {
         var body = new LotRequest(barcode, _settings.LoginCompany);
@@ -68,13 +69,13 @@ public sealed class MarkingApiService
             "/api/mantec/lot/latest_inject_by_barcode", body);
 
         if (resp == null)
-            return (null, null, null, "서버 연결에 실패했습니다.");
+            return (null, null, null, null, "서버 연결에 실패했습니다.");
 
         if (resp.LotContext == null || string.IsNullOrWhiteSpace(resp.LotContext.Bno))
-            return (null, null, null, "조회 결과가 없습니다.");
+            return (null, null, null, null, "조회 결과가 없습니다.");
 
         var condition = resp.Main?.Count > 0 ? resp.Main[0] : null;
-        return (resp.LotContext, condition, resp.InjectDefaults, null);
+        return (resp.LotContext, condition, resp.InjectDefaults, resp.InjectRnLabels, null);
     }
 
     private static string MapSaveErrorCode(string? code) => code switch

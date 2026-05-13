@@ -73,7 +73,7 @@
 
         <!-- 표준값 / 측정값 데이터 셀 -->
         <Style x:Key="StdCell" TargetType="Border" BasedOn="{StaticResource CellBorderBase}">
-            <Setter Property="Background" Value="#C8E6C9"/>
+            <Setter Property="Background" Value="#F8F8F8"/>
         </Style>
         <Style x:Key="ValCell" TargetType="Border" BasedOn="{StaticResource CellBorderBase}">
             <Setter Property="Background" Value="#FFFFFF"/>
@@ -117,7 +117,7 @@
         <!-- ── 메인 콘텐츠 (좌측 정보 + 우측 그리드) ── -->
         <Grid Grid.Row="2" Margin="24,0,24,24">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="370"/>
                 <ColumnDefinition Width="16"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -271,14 +271,12 @@
                           VerticalScrollBarVisibility="Auto">
                 <Border BorderBrush="{StaticResource BorderBrush}"
                         BorderThickness="1,1,0,0"
-                        HorizontalAlignment="Left"
                         VerticalAlignment="Top">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
-                        <RowDefinition Height="24"/>
                         <RowDefinition Height="26"/>
-                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="28"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -299,337 +297,309 @@
                         <RowDefinition Height="26"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="120"/>
                         <ColumnDefinition Width="130"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="60*" MinWidth="60"/>
+                        <ColumnDefinition Width="87*" MinWidth="87"/>
+                        <ColumnDefinition Width="60*" MinWidth="60"/>
+                        <ColumnDefinition Width="87*" MinWidth="87"/>
+                        <ColumnDefinition Width="60*" MinWidth="60"/>
+                        <ColumnDefinition Width="87*" MinWidth="87"/>
+                        <ColumnDefinition Width="60*" MinWidth="60"/>
+                        <ColumnDefinition Width="87*" MinWidth="87"/>
+                        <ColumnDefinition Width="60*" MinWidth="60"/>
+                        <ColumnDefinition Width="87*" MinWidth="87"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- ─── 헤더 행 0~1 ─── -->
-                    <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"
-                            Style="{StaticResource HeaderCell}"/>
+                    <!-- ─── 헤더 행 0: 온도 행 위 H 라벨 (cols 2-11, 페어 단위 ColSpan=2) ─── -->
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"/>
+                    <Border Grid.Row="0" Grid.Column="2"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="{Binding LblH1Header}" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="0" Grid.Column="4"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="{Binding LblH2Header}" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="0" Grid.Column="6"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="{Binding LblH3Header}" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="0" Grid.Column="8"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="{Binding LblH4Header}" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="0" Grid.Column="10" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="{Binding LblH5Header}" Style="{StaticResource HeaderText}"/></Border>
 
-                    <Border Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}">
-                        <TextBlock Text="1차" Style="{StaticResource HeaderText}"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}">
-                        <TextBlock Text="2차" Style="{StaticResource HeaderText}"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}">
-                        <TextBlock Text="3차" Style="{StaticResource HeaderText}"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}">
-                        <TextBlock Text="4차" Style="{StaticResource HeaderText}"/>
-                    </Border>
-                    <Border Grid.Row="0" Grid.Column="10" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}">
-                        <TextBlock Text="5차" Style="{StaticResource HeaderText}"/>
-                    </Border>
-
-                    <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource HeaderCell}"><TextBlock Text="표준" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource HeaderCell}"><TextBlock Text="측정" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource HeaderCell}"><TextBlock Text="표준" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="5" Style="{StaticResource HeaderCell}"><TextBlock Text="측정" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="6" Style="{StaticResource HeaderCell}"><TextBlock Text="표준" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="7" Style="{StaticResource HeaderCell}"><TextBlock Text="측정" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="8" Style="{StaticResource HeaderCell}"><TextBlock Text="표준" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="9" Style="{StaticResource HeaderCell}"><TextBlock Text="측정" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="10" Style="{StaticResource HeaderCell}"><TextBlock Text="표준" Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="1" Grid.Column="11" Style="{StaticResource HeaderCell}"><TextBlock Text="측정" Style="{StaticResource CellText}"/></Border>
+                    <!-- ─── 헤더 행 2: 1차~5차 (온도 행 아래, 사출조건 그룹 내부) ─── -->
+                    <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource HeaderCell}"/>
+                    <Border Grid.Row="2" Grid.Column="2"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="1차" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="2" Grid.Column="4"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="2차" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="2" Grid.Column="6"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="3차" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="2" Grid.Column="8"  Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="4차" Style="{StaticResource HeaderText}"/></Border>
+                    <Border Grid.Row="2" Grid.Column="10" Grid.ColumnSpan="2" Style="{StaticResource HeaderCell}"><TextBlock Text="5차" Style="{StaticResource HeaderText}"/></Border>
 
                     <!-- ─── 그룹 라벨 (Col 0, RowSpan) ─── -->
-                    <Border Grid.Row="2" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="사출조건" Style="{StaticResource CellText}"/>
+                    <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource GroupCell}">
+                        <TextBlock Text="{Binding LblInjectGroup}" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="7" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="계량조건" Style="{StaticResource CellText}"/>
+                    <Border Grid.Row="6" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
+                        <TextBlock Text="{Binding LblGuageGroup}" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="10" Grid.Column="0" Grid.RowSpan="4" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="가스조건" Style="{StaticResource CellText}"/>
+                    <Border Grid.Row="9" Grid.Column="0" Grid.RowSpan="4" Style="{StaticResource GroupCell}">
+                        <TextBlock Text="{Binding LblGasGroup}" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="14" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="보압" Style="{StaticResource CellText}"/>
+                    <Border Grid.Row="13" Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource GroupCell}">
+                        <TextBlock Text="{Binding LblHoldGroup}" Style="{StaticResource CellText}"/>
                     </Border>
-                    <Border Grid.Row="17" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="HOT RUNNER" Style="{StaticResource CellText}"/>
+                    <Border Grid.Row="16" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource GroupCell}">
+                        <TextBlock Text="{Binding LblHotRunnerGroup}" Style="{StaticResource CellText}"/>
                     </Border>
 
                     <!-- 단일 행 그룹 (Col 0~1 병합) -->
+                    <Border Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
+                        <TextBlock Text="{Binding LblCoolTimeGroup}" Style="{StaticResource CellText}"/>
+                    </Border>
                     <Border Grid.Row="19" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="냉각시간" Style="{StaticResource CellText}"/>
+                        <TextBlock Text="{Binding LblKumProtectGroup}" Style="{StaticResource CellText}"/>
                     </Border>
                     <Border Grid.Row="20" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="금형보호" Style="{StaticResource CellText}"/>
-                    </Border>
-                    <Border Grid.Row="21" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource GroupCell}">
-                        <TextBlock Text="가스위치" Style="{StaticResource CellText}"/>
+                        <TextBlock Text="{Binding LblGasPostionGroup}" Style="{StaticResource CellText}"/>
                     </Border>
 
                     <!-- ─── 항목명 라벨 (Col 1) ─── -->
-                    <Border Grid.Row="2"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="온도(°C)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="3"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"/>
-                    <Border Grid.Row="4"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="5"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="속도(%)"       Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="6"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간"          Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="7"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="8"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="속도(%)"       Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="9"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="위치(mm)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="딜레이(초)"    Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간(초)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="위치(mm)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="압력(kg/cm²)"  Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="속도(%)"       Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="시간(초)"      Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="A"             Style="{StaticResource CellText}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="B"             Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="1"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblInjectTemp}"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="3"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblInjectPress}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="4"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblInjectSpeed}" Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="5"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblInjectTime}"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="6"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGuagePress}"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="7"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGuageSpeed}"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="8"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGuagePosit}"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="9"  Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGasDelay}"    Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGasTime}"     Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGasPress}"    Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblGasPosit}"    Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblHoldPress}"   Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblHoldSpeed}"   Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblHoldTime}"    Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblHotRunnerA}"  Style="{StaticResource CellText}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="1" Style="{StaticResource LabelCellBorder}"><TextBlock Text="{Binding LblHotRunnerB}"  Style="{StaticResource CellText}"/></Border>
 
-                    <!-- ─── 데이터 셀: 사출조건 온도 (Row 2) ─── -->
-                    <Border Grid.Row="2" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="2" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <!-- ─── 데이터 셀: 사출조건 온도 (Row 1) ─── -->
+                    <Border Grid.Row="1" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTemp.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="1" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTemp.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
-                    <!-- ─── 데이터 셀: 사출조건 빈 행 (Row 3) ─── -->
-                    <Border Grid.Row="3" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectEmpty.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectEmpty.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectEmpty.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectEmpty.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectEmpty.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectEmpty.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectEmpty.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectEmpty.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectEmpty.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="3" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectEmpty.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <!-- ─── 데이터 셀: 사출조건 압력 (Row 3) ─── -->
+                    <Border Grid.Row="3" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="3" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
-                    <!-- ─── 데이터 셀: 사출조건 압력 (Row 4) ─── -->
-                    <Border Grid.Row="4" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectPressure.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="4" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectPressure.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <!-- ─── 데이터 셀: 사출조건 속도 (Row 4) ─── -->
+                    <Border Grid.Row="4" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="4" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
-                    <!-- ─── 데이터 셀: 사출조건 속도 (Row 5) ─── -->
-                    <Border Grid.Row="5" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectSpeed.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="5" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectSpeed.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-
-                    <!-- ─── 데이터 셀: 사출조건 시간 (Row 6) ─── -->
-                    <Border Grid.Row="6" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="6" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <!-- ─── 데이터 셀: 사출조건 시간 (Row 5) ─── -->
+                    <Border Grid.Row="5" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowInjectTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="5" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowInjectTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 계량조건 압력 (Row 7) ─── -->
-                    <Border Grid.Row="7" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="7" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePressure.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="6" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePressure.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 계량조건 속도 (Row 8) ─── -->
-                    <Border Grid.Row="8" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="8" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuageSpeed.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="7" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuageSpeed.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 계량조건 위치 (Row 9) ─── -->
-                    <Border Grid.Row="9" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="9" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGuagePosit.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="8" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGuagePosit.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스조건 딜레이 (Row 10) ─── -->
-                    <Border Grid.Row="10" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="10" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasDelay.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="9" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasDelay.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스조건 시간 (Row 11) ─── -->
-                    <Border Grid.Row="11" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="11" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="10" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스조건 압력 (Row 11) ─── -->
-                    <Border Grid.Row="12" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="12" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPress.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="11" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPress.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스조건 위치 (Row 12) ─── -->
-                    <Border Grid.Row="13" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="13" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPosit.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="12" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPosit.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 보압 압력 (Row 13) ─── -->
-                    <Border Grid.Row="14" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="14" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldPress.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="13" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldPress.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 보압 속도 (Row 14) ─── -->
-                    <Border Grid.Row="15" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="15" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldSpeed.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="14" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldSpeed.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 보압 시간 (Row 15) ─── -->
-                    <Border Grid.Row="16" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="16" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHoldTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="15" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHoldTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: HOT RUNNER A (Row 16) ─── -->
-                    <Border Grid.Row="17" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="17" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerA.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="16" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerA.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: HOT RUNNER B (Row 17) ─── -->
-                    <Border Grid.Row="18" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="18" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowHotRunnerB.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="17" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowHotRunnerB.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 냉각시간 (Row 18) ─── -->
-                    <Border Grid.Row="19" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="19" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowCoolTime.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="18" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowCoolTime.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 금형보호 (Row 19) ─── -->
-                    <Border Grid.Row="20" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="20" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowKumProtect.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="19" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowKumProtect.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
 
                     <!-- ─── 데이터 셀: 가스위치 (Row 20) ─── -->
-                    <Border Grid.Row="21" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
-                    <Border Grid.Row="21" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="2"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="3"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val1, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="4"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="5"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val2, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="6"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="7"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val3, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="8"  Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="9"  Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val4, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="10" Style="{StaticResource StdCell}"><TextBox Text="{Binding RowGasPostion.Std5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
+                    <Border Grid.Row="20" Grid.Column="11" Style="{StaticResource ValCell}"><TextBox Text="{Binding RowGasPostion.Val5, Mode=OneWay}" Style="{StaticResource CellTextBox}"/></Border>
                 </Grid>
                 </Border>
             </ScrollViewer>

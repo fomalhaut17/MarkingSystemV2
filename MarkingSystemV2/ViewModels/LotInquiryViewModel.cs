@@ -1,3 +1,5 @@
+using System.Net;
+using System.Text.RegularExpressions;
 using MarkingSystemV2.Models;
 using MarkingSystemV2.Services;
 
@@ -27,7 +29,6 @@ public sealed class LotInquiryViewModel : ObservableObject
 
     // 사출조건
     private ConditionRow _rowInjectTemp     = Empty();
-    private ConditionRow _rowInjectEmpty    = Empty();
     private ConditionRow _rowInjectPressure = Empty();
     private ConditionRow _rowInjectSpeed    = Empty();
     private ConditionRow _rowInjectTime     = Empty();
@@ -56,6 +57,9 @@ public sealed class LotInquiryViewModel : ObservableObject
     private ConditionRow _rowCoolTime       = Empty();
     private ConditionRow _rowKumProtect     = Empty();
     private ConditionRow _rowGasPostion     = Empty();
+
+    // 라벨 (INJECT_RN_LABELS)
+    private Dictionary<string,string>? _labels;
 
     public LotInquiryViewModel(MarkingApiService api)
     {
@@ -114,7 +118,6 @@ public sealed class LotInquiryViewModel : ObservableObject
 
     // 사출조건
     public ConditionRow RowInjectTemp     { get => _rowInjectTemp;     private set => SetField(ref _rowInjectTemp, value); }
-    public ConditionRow RowInjectEmpty    { get => _rowInjectEmpty;    private set => SetField(ref _rowInjectEmpty, value); }
     public ConditionRow RowInjectPressure { get => _rowInjectPressure; private set => SetField(ref _rowInjectPressure, value); }
     public ConditionRow RowInjectSpeed    { get => _rowInjectSpeed;    private set => SetField(ref _rowInjectSpeed, value); }
     public ConditionRow RowInjectTime     { get => _rowInjectTime;     private set => SetField(ref _rowInjectTime, value); }
@@ -144,6 +147,42 @@ public sealed class LotInquiryViewModel : ObservableObject
     public ConditionRow RowKumProtect     { get => _rowKumProtect;     private set => SetField(ref _rowKumProtect, value); }
     public ConditionRow RowGasPostion     { get => _rowGasPostion;     private set => SetField(ref _rowGasPostion, value); }
 
+    // ── 라벨 (INJECT_RN_LABELS 우선, 없으면 기본 표시문구) ────────────────────
+    // 그룹 라벨
+    public string LblInjectGroup     => Lookup("SA_INJECT",       "사출조건");
+    public string LblGuageGroup      => Lookup("SA_GUAGE",        "계량조건");
+    public string LblGasGroup        => Lookup("SA_GAS",          "가스조건");
+    public string LblHoldGroup       => Lookup("SA_HOLD",         "보압");
+    public string LblHotRunnerGroup  => Lookup("SA_HOT_RUNNER",   "HOT RUNNER");
+    public string LblCoolTimeGroup   => Lookup("SA_COOL_TIME",    "냉각시간");
+    public string LblKumProtectGroup => Lookup("SA_KUM_PROTECT",  "금형보호");
+    public string LblGasPostionGroup => Lookup("SA_GAS_POSTION",  "가스위치");
+
+    // 항목 라벨
+    public string LblInjectTemp   => Lookup("SA_INJECT_H",     "온도(℃)");
+    public string LblInjectPress  => Lookup("SA_INJECT_PRESS", "압력(Kg/cm²)");
+    public string LblInjectSpeed  => Lookup("SA_INJECT_SPEED", "속도(%)");
+    public string LblInjectTime   => Lookup("SA_INJECT_TIME",  "시간(초)");
+    public string LblGuagePress   => Lookup("SA_GUAGE_PRESS",  "압력(Kg/cm²)");
+    public string LblGuageSpeed   => Lookup("SA_GUAGE_SPEED",  "속도(%)");
+    public string LblGuagePosit   => Lookup("SA_GUAGE_POSIT",  "위치(mm)");
+    public string LblGasDelay     => Lookup("SA_GAS_DELAY",    "딜레이(초)");
+    public string LblGasTime      => Lookup("SA_GAS_TIME",     "시간(초)");
+    public string LblGasPress     => Lookup("SA_GAS_PRESS",    "압력(Kg/cm²)");
+    public string LblGasPosit     => Lookup("SA_GAS_POSIT",    "위치(mm)");
+    public string LblHoldPress    => Lookup("SA_HOLD_PRESS",   "압력(Kg/cm²)");
+    public string LblHoldSpeed    => Lookup("SA_HOLD_SPEED",   "속도(%)");
+    public string LblHoldTime     => Lookup("SA_HOLD_TIME",    "시간(초)");
+    public string LblHotRunnerA   => Lookup("SA_HOT_RUNNER_A", "A");
+    public string LblHotRunnerB   => Lookup("SA_HOT_RUNNER_B", "B");
+
+    // 온도 행 컬럼 헤더 (서버 라벨 그대로)
+    public string LblH1Header => Lookup("SA_H1", "H1");
+    public string LblH2Header => Lookup("SA_H2", "H2");
+    public string LblH3Header => Lookup("SA_H3", "H3");
+    public string LblH4Header => Lookup("SA_H4", "H4");
+    public string LblH5Header => Lookup("SA_H5", "H5");
+
     public AsyncRelayCommand QueryCommand { get; }
 
     private async Task ExecuteQueryAsync()
@@ -154,7 +193,7 @@ public sealed class LotInquiryViewModel : ObservableObject
         IsError       = false;
         IsBusy        = true;
 
-        var (context, condition, defaults, error) = await _api.LookupByLotAsync(LotNo.Trim());
+        var (context, condition, defaults, labels, error) = await _api.LookupByLotAsync(LotNo.Trim());
 
         IsBusy = false;
 
@@ -168,7 +207,27 @@ public sealed class LotInquiryViewModel : ObservableObject
 
         ApplyContext(context!);
         ApplyCondition(condition, defaults);
+        ApplyLabels(labels);
     }
+
+    private void ApplyLabels(Dictionary<string,string>? labels)
+    {
+        _labels = labels;
+        // 모든 Lbl* 프로퍼티 갱신
+        OnPropertyChanged(string.Empty);
+    }
+
+    private string Lookup(string key, string fallback)
+    {
+        if (_labels != null && _labels.TryGetValue(key, out var v) && !string.IsNullOrWhiteSpace(v))
+            return DecodeHtmlEntities(v);
+        return fallback;
+    }
+
+    // &#37 (세미콜론 누락 케이스) 보정 후 표준 HtmlDecode
+    private static readonly Regex MissingSemicolon = new(@"&#(\d+)(?!;)", RegexOptions.Compiled);
+    private static string DecodeHtmlEntities(string s)
+        => WebUtility.HtmlDecode(MissingSemicolon.Replace(s, "&#$1;"));
 
     private void ApplyContext(LotContextInfo ctx)
     {
@@ -187,7 +246,6 @@ public sealed class LotInquiryViewModel : ObservableObject
     {
         RowInjectTemp     = Row(d?.InjectH1,     d?.InjectH2,     d?.InjectH3,     d?.InjectH4,     d?.InjectH5,
                                 c?.InjectH1,     c?.InjectH2,     c?.InjectH3,     c?.InjectH4,     c?.InjectH5);
-        RowInjectEmpty    = Empty();
         RowInjectPressure = Row(d?.InjectPress1, d?.InjectPress2, d?.InjectPress3, d?.InjectPress4, d?.InjectPress5,
                                 c?.InjectPress1, c?.InjectPress2, c?.InjectPress3, c?.InjectPress4, c?.InjectPress5);
         RowInjectSpeed    = Row(d?.InjectSpeed1, d?.InjectSpeed2, d?.InjectSpeed3, d?.InjectSpeed4, d?.InjectSpeed5,
@@ -236,6 +294,7 @@ public sealed class LotInquiryViewModel : ObservableObject
         Carnam = Itemnam = Itemcod = RwMatItemnam = RwMatGrNm = null;
         ProDate = ProMechnam = EngraveProDate = EngraveMechnam = null;
         ApplyCondition(null, null);
+        ApplyLabels(null);
     }
 
     private static ConditionRow Empty() => new();

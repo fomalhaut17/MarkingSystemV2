@@ -5,7 +5,7 @@
     <UserControl.Resources>
         <Style x:Key="FieldRow" TargetType="Grid">
             <Setter Property="Height" Value="56"/>
-            <Setter Property="Margin" Value="0,0,0,28"/>
+            <Setter Property="Margin" Value="0,0,0,40"/>
         </Style>
     </UserControl.Resources>
 
@@ -57,7 +57,7 @@
                              Height="56"
                              Style="{StaticResource ReadOnlyTextBox}"
                              IsTabStop="False"
-                             Margin="0,0,0,28"/>
+                             Margin="0,0,0,40"/>
 
                     <!-- 제조일자 -->
                     <TextBlock Text="제조일자" Style="{StaticResource LabelText}" Margin="0,0,0,6"/>
@@ -65,7 +65,7 @@
                              Height="56"
                              Style="{StaticResource ReadOnlyTextBox}"
                              IsTabStop="False"
-                             Margin="0,0,0,28"/>
+                             Margin="0,0,0,40"/>
 
                     <!-- 용기 내 수량 -->
                     <TextBlock Text="용기 내 수량" Style="{StaticResource LabelText}" Margin="0,0,0,6"/>
@@ -105,7 +105,7 @@
                              Height="56"
                              Style="{StaticResource ReadOnlyTextBox}"
                              IsTabStop="False"
-                             Margin="0,0,0,28"/>
+                             Margin="0,0,0,40"/>
 
                     <!-- 발행시작번호 -->
                     <TextBlock Text="발행시작번호" Style="{StaticResource LabelText}" Margin="0,0,0,6"/>

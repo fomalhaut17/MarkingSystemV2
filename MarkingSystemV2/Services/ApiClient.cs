@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -18,6 +19,15 @@ public sealed class ApiClient
         PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy        = new SnakeCaseLowerWithDigitSeparator()
     };
+
+    // API 요청/응답 로깅 (테스터·사용자 버그 진단용). 기본 ON.
+    // 비활성화: ApiClient.DebugLogEnabled = false 또는 appsettings에 토글 추가 필요
+    public static bool DebugLogEnabled { get; set; } = true;
+    private const long DebugLogMaxBytes = 5 * 1024 * 1024;   // 5MB → .old로 회전
+    private static readonly string DebugLogPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "ManntekMarkingSystem", "api-debug.log");
+    private static readonly object DebugLogLock = new();
 
     private readonly string _baseUrl;
     private readonly AuthService _auth;
@@ -41,8 +51,16 @@ public sealed class ApiClient
                 response = await SendAsync(path, body);
         }
 
-        if (!response.IsSuccessStatusCode) return null;
+        if (DebugLogEnabled)
+        {
+            var rawBody = await response.Content.ReadAsStringAsync();
+            DebugLog($"<-- {(int)response.StatusCode} {response.ReasonPhrase}\n{rawBody}\n");
 
+            if (!response.IsSuccessStatusCode) return null;
+            return JsonSerializer.Deserialize<TResponse>(rawBody, _jsonOpts);
+        }
+
+        if (!response.IsSuccessStatusCode) return null;
         return await response.Content.ReadFromJsonAsync<TResponse>(_jsonOpts);
     }
 
@@ -55,7 +73,36 @@ public sealed class ApiClient
         if (_auth.AccessToken != null)
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _auth.AccessToken);
 
+        if (DebugLogEnabled)
+        {
+            var bodyJson = JsonSerializer.Serialize(body, _jsonOpts);
+            var token    = _auth.AccessToken is { Length: > 12 } t ? $"{t[..6]}…{t[^6..]}" : (_auth.AccessToken ?? "<none>");
+            DebugLog($"--> POST {_baseUrl}{path}\nAuthorization: Bearer {token}\nContent-Type: application/json\n{bodyJson}");
+        }
+
         return await _http.SendAsync(request);
+    }
+
+    private static void DebugLog(string text)
+    {
+        try
+        {
+            var dir = Path.GetDirectoryName(DebugLogPath);
+            if (dir != null) Directory.CreateDirectory(dir);
+            lock (DebugLogLock)
+            {
+                // 회전: 5MB 넘으면 .old로 옮기고 새 파일로 시작
+                var info = new FileInfo(DebugLogPath);
+                if (info.Exists && info.Length > DebugLogMaxBytes)
+                {
+                    var old = DebugLogPath + ".old";
+                    if (File.Exists(old)) File.Delete(old);
+                    File.Move(DebugLogPath, old);
+                }
+                File.AppendAllText(DebugLogPath, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {text}\n", Encoding.UTF8);
+            }
+        }
+        catch { /* 로깅 실패는 무시 */ }
     }
 
     // SnakeCaseLower + 글자→숫자 경계에도 underscore 삽입 (예: InjectPress1 → inject_press_1)
