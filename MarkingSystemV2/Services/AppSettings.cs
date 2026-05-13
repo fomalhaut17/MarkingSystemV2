@@ -64,5 +64,5 @@ public sealed class ApiSettings
 public sealed class LoggingSettings
 {
     // null = AppMode로 자동 결정 (local/dev=true, prod=false). bool 값이면 그 값 사용.
-    [JsonPropertyName("ApiDebug")] public bool? ApiDebug { get; init; }
+    [JsonPropertyName("Verbose")] public bool? Verbose { get; init; }
 }
