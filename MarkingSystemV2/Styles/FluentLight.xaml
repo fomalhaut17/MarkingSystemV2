@@ -10,7 +10,7 @@
     <!-- ═══════════════════════════════════════════════════════
          FONTS
     ═══════════════════════════════════════════════════════ -->
-    <FontFamily x:Key="AppFont">pack://application:,,,/MarkingSystemV2;component/Fonts/#NanumSquare, Malgun Gothic, 맑은 고딕</FontFamily>
+    <FontFamily x:Key="AppFont">Malgun Gothic, 맑은 고딕</FontFamily>
 
     <!-- ═══════════════════════════════════════════════════════
          COLORS  (Light Theme)
