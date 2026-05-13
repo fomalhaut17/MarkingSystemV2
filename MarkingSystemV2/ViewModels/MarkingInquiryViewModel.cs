@@ -155,7 +155,7 @@ public sealed class MarkingInquiryViewModel : ObservableObject
 
         ClearResult();
 
-        var (info, error) = await _api.LookupByBarcodeAsync(Barcode.Trim());
+        var (info, error) = await _api.LookupByBarcodeAsync(InputSanitizer.Clean(Barcode));
 
         IsBusy = false;
 
@@ -213,7 +213,7 @@ public sealed class MarkingInquiryViewModel : ObservableObject
 
         int endSerialInt = int.Parse(EndSerial);
         var error = await _api.SaveInspectionAsync(
-            Barcode.Trim(), _barcodeInfo!.LotNoHead!, _startSerialInt, endSerialInt);
+            InputSanitizer.Clean(Barcode), _barcodeInfo!.LotNoHead!, _startSerialInt, endSerialInt);
 
         if (error != null)
         {
@@ -227,7 +227,7 @@ public sealed class MarkingInquiryViewModel : ObservableObject
         IsError       = false;
 
         // 같은 바코드로 자동 재조회 (StatusMessage 유지)
-        var (info, queryError) = await _api.LookupByBarcodeAsync(Barcode.Trim());
+        var (info, queryError) = await _api.LookupByBarcodeAsync(InputSanitizer.Clean(Barcode));
 
         IsBusy = false;
 

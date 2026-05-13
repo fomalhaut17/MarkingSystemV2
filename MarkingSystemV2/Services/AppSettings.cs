@@ -11,8 +11,9 @@ internal sealed class AppModeSelector
 
 public sealed class AppSettings
 {
-    [JsonIgnore]              public string     AppMode { get; set; } = "local";
-    [JsonPropertyName("Api")] public ApiSettings Api    { get; init; } = new();
+    [JsonIgnore]                  public string         AppMode { get; set; } = "local";
+    [JsonPropertyName("Api")]     public ApiSettings    Api     { get; init; } = new();
+    [JsonPropertyName("Logging")] public LoggingSettings Logging { get; init; } = new();
 
     public static AppSettings Load()
     {
@@ -58,4 +59,10 @@ public sealed class ApiSettings
     [JsonPropertyName("BaseUrl")]      public string BaseUrl      { get; init; } = "https://wizmes.com";
     [JsonPropertyName("AuthBaseUrl")]  public string AuthBaseUrl  { get; init; } = "https://wizmes.com";
     [JsonPropertyName("LoginCompany")] public string LoginCompany { get; init; } = "DEMO";
+}
+
+public sealed class LoggingSettings
+{
+    // null = AppMode로 자동 결정 (local/dev=true, prod=false). bool 값이면 그 값 사용.
+    [JsonPropertyName("ApiDebug")] public bool? ApiDebug { get; init; }
 }

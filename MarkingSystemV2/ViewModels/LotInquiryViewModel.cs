@@ -193,7 +193,7 @@ public sealed class LotInquiryViewModel : ObservableObject
         IsError       = false;
         IsBusy        = true;
 
-        var (context, condition, defaults, labels, error) = await _api.LookupByLotAsync(LotNo.Trim());
+        var (context, condition, defaults, labels, error) = await _api.LookupByLotAsync(InputSanitizer.Clean(LotNo));
 
         IsBusy = false;
 

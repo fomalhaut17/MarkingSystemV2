@@ -9,7 +9,7 @@ namespace MarkingSystemV2.Services;
 /// <summary>
 /// JWT 인증 서비스.
 /// Access Token  : 항상 메모리에만 보관 (앱 종료 시 소멸).
-/// Refresh Token : rememberMe=true 시 파일(%APPDATA%\ManntekMarkingSystem\auth.json) 저장,
+/// Refresh Token : rememberMe=true 시 파일(%APPDATA%\MantecMarkingSystem\auth.json) 저장,
 ///                 false 시 메모리에만 보관.
 /// </summary>
 public sealed class AuthService
@@ -32,7 +32,7 @@ public sealed class AuthService
         _authBaseUrl   = authBaseUrl.TrimEnd('/');
         _tokenFilePath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "ManntekMarkingSystem", "auth.json");
+            "MantecMarkingSystem", "auth.json");
     }
 
     public string? AccessToken => _accessToken;

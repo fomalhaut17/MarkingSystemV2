@@ -16,6 +16,10 @@ public partial class App : Application
     {
         _settings = AppSettings.Load();
 
+        // API 로깅 토글: appsettings 명시값 우선, 없으면 AppMode로 결정 (local/dev=on, prod=off)
+        ApiClient.DebugLogEnabled = _settings.Logging.ApiDebug
+            ?? _settings.AppMode is "local" or "dev";
+
         _auth = new AuthService(_settings.Api.AuthBaseUrl);
 
         var apiClient  = new ApiClient(_settings.Api.BaseUrl, _auth);

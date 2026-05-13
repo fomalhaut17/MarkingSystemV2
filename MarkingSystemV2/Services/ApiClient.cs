@@ -26,7 +26,7 @@ public sealed class ApiClient
     private const long DebugLogMaxBytes = 5 * 1024 * 1024;   // 5MB → .old로 회전
     private static readonly string DebugLogPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "ManntekMarkingSystem", "api-debug.log");
+        "MantecMarkingSystem", "api-debug.log");
     private static readonly object DebugLogLock = new();
 
     private readonly string _baseUrl;
@@ -42,26 +42,47 @@ public sealed class ApiClient
         where TRequest  : class
         where TResponse : class
     {
-        var response = await SendAsync(path, body);
-
-        if (response.StatusCode == HttpStatusCode.Unauthorized)
+        try
         {
-            var refreshed = await _auth.RefreshAsync();
-            if (refreshed)
-                response = await SendAsync(path, body);
-        }
+            var response = await SendAsync(path, body);
 
-        if (DebugLogEnabled)
-        {
-            var rawBody = await response.Content.ReadAsStringAsync();
-            DebugLog($"<-- {(int)response.StatusCode} {response.ReasonPhrase}\n{rawBody}\n");
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                var refreshed = await _auth.RefreshAsync();
+                if (refreshed)
+                    response = await SendAsync(path, body);
+            }
+
+            if (DebugLogEnabled)
+            {
+                var rawBody = await response.Content.ReadAsStringAsync();
+                DebugLog($"<-- {(int)response.StatusCode} {response.ReasonPhrase}\n{rawBody}\n");
+
+                if (!response.IsSuccessStatusCode) return null;
+                return JsonSerializer.Deserialize<TResponse>(rawBody, _jsonOpts);
+            }
 
             if (!response.IsSuccessStatusCode) return null;
-            return JsonSerializer.Deserialize<TResponse>(rawBody, _jsonOpts);
+            return await response.Content.ReadFromJsonAsync<TResponse>(_jsonOpts);
         }
-
-        if (!response.IsSuccessStatusCode) return null;
-        return await response.Content.ReadFromJsonAsync<TResponse>(_jsonOpts);
+        catch (HttpRequestException ex)
+        {
+            // 서버 미기동·DNS 실패·연결 거부 등
+            DebugLog($"<-- EX HttpRequestException: {ex.Message}\n");
+            return null;
+        }
+        catch (TaskCanceledException ex)
+        {
+            // 타임아웃 (HttpClient.Timeout 초과)
+            DebugLog($"<-- EX TaskCanceledException(timeout): {ex.Message}\n");
+            return null;
+        }
+        catch (JsonException ex)
+        {
+            // 응답이 JSON이 아니거나 모델과 불일치
+            DebugLog($"<-- EX JsonException: {ex.Message}\n");
+            return null;
+        }
     }
 
     private async Task<HttpResponseMessage> SendAsync<TRequest>(string path, TRequest body)
