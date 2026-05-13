@@ -3,15 +3,16 @@ setlocal
 
 set ENV=%1
 if "%ENV%"=="" (
-    echo Usage: build-release.bat [local^|prod]
+    echo Usage: build-release.bat [local^|dev^|prod]
     echo.
     echo   local  - Mock API server target ^(localhost:47300^)
+    echo   dev    - wizMES dev server target
     echo   prod   - wizMES production API target
     exit /b 1
 )
 
-if not "%ENV%"=="local" if not "%ENV%"=="prod" (
-    echo Error: ENV must be 'local' or 'prod'
+if not "%ENV%"=="local" if not "%ENV%"=="dev" if not "%ENV%"=="prod" (
+    echo Error: ENV must be 'local', 'dev', or 'prod'
     exit /b 1
 )
 
@@ -37,7 +38,7 @@ echo [2/4] Setting AppMode to %ENV%...
 powershell -NoProfile -Command "Set-Content -Path '%OUT%\appsettings.json' -Value '{\"AppMode\":\"%ENV%\"}' -Encoding UTF8"
 
 echo [3/4] Cleaning unused files (other appsettings, pdb)...
-for %%e in (local prod) do (
+for %%e in (local dev prod) do (
     if not "%%e"=="%ENV%" (
         if exist %OUT%\appsettings.%%e.json del /f /q %OUT%\appsettings.%%e.json
     )

@@ -35,6 +35,9 @@
     <None Update="appsettings.local.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="appsettings.dev.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="appsettings.prod.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
