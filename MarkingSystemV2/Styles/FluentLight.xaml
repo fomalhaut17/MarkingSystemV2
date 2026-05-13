@@ -10,7 +10,7 @@
     <!-- ═══════════════════════════════════════════════════════
          FONTS
     ═══════════════════════════════════════════════════════ -->
-    <FontFamily x:Key="AppFont">pack://application:,,,/MarkingSystemV2;component/Fonts/#NanumSquare, 맑은 고딕, Malgun Gothic</FontFamily>
+    <FontFamily x:Key="AppFont">pack://application:,,,/MarkingSystemV2;component/Fonts/#NanumSquare, Malgun Gothic, 맑은 고딕</FontFamily>
 
     <!-- ═══════════════════════════════════════════════════════
          COLORS  (Light Theme)
@@ -45,7 +45,7 @@
         <Setter Property="BorderThickness"          Value="1"/>
         <Setter Property="Padding"                  Value="10,0"/>
         <Setter Property="FontFamily"               Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"                 Value="14"/>
+        <Setter Property="FontSize"                 Value="16"/>
         <Setter Property="CaretBrush"               Value="{StaticResource TextPrimary}"/>
         <Setter Property="SelectionBrush"           Value="{StaticResource BluePrimary}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -87,7 +87,7 @@
         <Setter Property="BorderThickness"          Value="1"/>
         <Setter Property="Padding"                  Value="10,0"/>
         <Setter Property="FontFamily"               Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"                 Value="14"/>
+        <Setter Property="FontSize"                 Value="16"/>
         <Setter Property="CaretBrush"               Value="{StaticResource TextPrimary}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -170,7 +170,7 @@
         <Setter Property="BorderThickness"          Value="1"/>
         <Setter Property="Padding"                  Value="10,0"/>
         <Setter Property="FontFamily"               Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"                 Value="14"/>
+        <Setter Property="FontSize"                 Value="16"/>
         <Setter Property="IsReadOnly"               Value="True"/>
         <Setter Property="Cursor"                   Value="Arrow"/>
         <Setter Property="FocusVisualStyle"         Value="{x:Null}"/>
@@ -202,7 +202,7 @@
         <Setter Property="Foreground"      Value="White"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontFamily"      Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="FontSize"        Value="16"/>
         <Setter Property="FontWeight"      Value="Bold"/>
         <Setter Property="Cursor"          Value="Hand"/>
         <Setter Property="Template">
@@ -235,7 +235,7 @@
         <Setter Property="Foreground"      Value="White"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontFamily"      Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="FontSize"        Value="16"/>
         <Setter Property="FontWeight"      Value="Bold"/>
         <Setter Property="Cursor"          Value="Hand"/>
         <Setter Property="Template">
@@ -269,7 +269,7 @@
         <Setter Property="BorderBrush"     Value="{StaticResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontFamily"      Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"        Value="14"/>
+        <Setter Property="FontSize"        Value="16"/>
         <Setter Property="Cursor"          Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -311,19 +311,19 @@
     <Style x:Key="LabelText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextLabel}"/>
         <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"   Value="13"/>
+        <Setter Property="FontSize"   Value="15"/>
     </Style>
 
     <Style x:Key="BodyText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
         <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"   Value="14"/>
+        <Setter Property="FontSize"   Value="16"/>
     </Style>
 
     <Style x:Key="ValueText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
         <Setter Property="FontFamily" Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"   Value="15"/>
+        <Setter Property="FontSize"   Value="17"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
@@ -333,7 +333,7 @@
 
     <Style x:Key="AppTabItem" TargetType="TabItem">
         <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
-        <Setter Property="FontSize"    Value="14"/>
+        <Setter Property="FontSize"    Value="16"/>
         <Setter Property="FontWeight"  Value="Bold"/>
         <Setter Property="Padding"     Value="0"/>
         <Setter Property="Margin"      Value="0"/>
@@ -342,7 +342,7 @@
                 <ControlTemplate TargetType="TabItem">
                     <Border x:Name="TabBorder"
                             Background="White"
-                            Width="160" Height="48"
+                            Width="200" Height="52"
                             BorderThickness="0">
                         <TextBlock x:Name="TabText"
                                    Text="{TemplateBinding Header}"
@@ -350,7 +350,7 @@
                                    VerticalAlignment="Center"
                                    Foreground="{StaticResource TextPrimary}"
                                    FontFamily="{StaticResource AppFont}"
-                                   FontSize="14"
+                                   FontSize="16"
                                    FontWeight="Bold"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -380,11 +380,24 @@
                 <ControlTemplate TargetType="TabControl">
                     <Grid Background="White">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="48"/>
+                            <RowDefinition Height="52"/>
                             <RowDefinition Height="1"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TabPanel Grid.Row="0" IsItemsHost="True" Background="White"/>
+                        <Grid Grid.Row="0" Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TabPanel Grid.Column="0" IsItemsHost="True" Background="White" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding TodayDisplay}"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource TextSecondary}"
+                                       FontFamily="{StaticResource AppFont}"
+                                       FontSize="16"
+                                       Margin="0,0,24,0"/>
+                        </Grid>
                         <Rectangle Grid.Row="1" Fill="{StaticResource DividerBrush}"/>
                         <ContentPresenter Grid.Row="2"
                                           x:Name="PART_SelectedContentHost"

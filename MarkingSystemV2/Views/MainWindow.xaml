@@ -5,7 +5,9 @@
         Title="만텍 각인 시스템"
         Width="1440" Height="900"
         MinWidth="1024" MinHeight="768"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -33,31 +35,23 @@
                        Text="만텍 각인 시스템"
                        Foreground="White"
                        FontFamily="{StaticResource AppFont}"
-                       FontSize="18"
+                       FontSize="20"
                        FontWeight="Bold"
                        VerticalAlignment="Center"
                        Margin="24,0"/>
 
-            <StackPanel Grid.Column="1"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        Margin="0,0,20,0">
-                <Button Content="로그아웃"
-                        Command="{Binding LogoutCommand}"
-                        FontFamily="{StaticResource AppFont}"
-                        FontSize="13"
-                        Foreground="White"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Cursor="Hand"
-                        Padding="12,6"/>
-                <TextBlock Text="{Binding TodayDisplay}"
-                           Foreground="White"
-                           FontFamily="{StaticResource AppFont}"
-                           FontSize="13"
-                           VerticalAlignment="Center"
-                           Margin="8,0,0,0"/>
-            </StackPanel>
+            <Button Grid.Column="1"
+                    Content="로그아웃"
+                    Command="{Binding LogoutCommand}"
+                    FontFamily="{StaticResource AppFont}"
+                    FontSize="15"
+                    Foreground="White"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Padding="12,6"
+                    VerticalAlignment="Center"
+                    Margin="0,0,20,0"/>
         </Grid>
 
         <!-- ── 탭 컨테이너 ── -->
@@ -85,7 +79,7 @@
                 <!-- 각인번호 조회 (탭 0) -->
                 <TextBlock VerticalAlignment="Center"
                            FontFamily="{StaticResource AppFont}"
-                           FontSize="13"
+                           FontSize="15"
                            Text="{Binding MarkingInquiry.DisplayStatus}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
@@ -113,7 +107,7 @@
                 <!-- 생산 Lot 조회 (탭 1) -->
                 <TextBlock VerticalAlignment="Center"
                            FontFamily="{StaticResource AppFont}"
-                           FontSize="13"
+                           FontSize="15"
                            Text="{Binding LotInquiry.DisplayStatus}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
@@ -142,7 +136,7 @@
                 <TextBlock HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            FontFamily="{StaticResource AppFont}"
-                           FontSize="12"
+                           FontSize="14"
                            Foreground="{StaticResource TextSecondary}"
                            Text="{Binding CurrentVersion}"/>
             </Grid>
