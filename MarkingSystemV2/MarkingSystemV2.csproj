@@ -28,11 +28,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\*.ttf"/>
-    <Resource Include="Fonts\*.otf"/>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="all"/>
   </ItemGroup>
 
